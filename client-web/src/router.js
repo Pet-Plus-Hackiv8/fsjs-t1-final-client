@@ -1,6 +1,7 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./views/Dashboard";
+import Veterinarians from "./views/Veterinarian";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "veterinarians",
-                element: <>veterinarians</>
+                element: <Veterinarians />
             },
             {
                 path: "histories",

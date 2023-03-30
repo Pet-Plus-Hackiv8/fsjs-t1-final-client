@@ -1,4 +1,4 @@
-import DashboardTable from "../components/DashboardTable";
+import DashboardTable from "../components/Tables/DashboardTable";
 
 export default function Dashboard() {
     return (
