@@ -1,21 +1,26 @@
-export default function DashboardCard() {
+export default function PostsCard() {
     return (
         <div className="h-24 my-4 rounded-xl p-2 w-full flex items-center bg-[#eafdfc]">
             <div className="  p-4 w-5/12 ">
-                <div className=" font-semibold text-[#567096] duration-200">
-                    <div className=" hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 duration-200 active:text-[#ff9787] select-none  w-fit">
-                        Randy
-                    </div>
-                </div>
-                <div className=" text-sm text-gray-500 select-none">
-                    Created 3 days ago
+                <div className="font-semibold">
+                    How to Train Your Dragon
                 </div>
             </div>
-            <div className=" w-3/12 select-none">
-                Shift 1
+            <div className=" w-2/12">
+                3 February 2023
             </div>
-            <div className="  w-3/12 select-none">
-                7 April 2023
+            <div className=" w-2/12">
+                <span className=" bg-green-200 p-4 pt-1 pb-2 rounded-full">
+                    active
+                </span>
+                {/* <span className=" bg-amber-200 p-4 pt-1 pb-2 rounded-full">
+                    archived
+                </span> */}
+            </div>
+            <div className="  w-2/12">
+                <span className=" bg-sky-200 p-2 px-6 pt-1 pb-2 rounded-full">
+                    view
+                </span>
             </div>
             <div className=" w-1/12">
                 <svg fill="none" className=" hover:bg-[#d4e6e6] duration-200 rounded-md active:scale-95  active:bg-[#ff9787] w-8 p-0" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

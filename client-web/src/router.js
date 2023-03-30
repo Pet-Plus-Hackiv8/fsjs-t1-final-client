@@ -1,6 +1,7 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./views/Dashboard";
+import Posts from "./views/Posts";
 import Veterinarians from "./views/Veterinarian";
 
 const router = createBrowserRouter([
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "posts",
-                element: <>posts</>
+                element: <Posts />
             },
             {
                 path: "veterinarians",
