@@ -6,15 +6,7 @@ export default function Layout() {
         navigate(page)
     }
     return (<>
-        <div class="navbar bg-[#2d3748] flex justify-between">
-            <img className="h-16 ml-[4.6rem]" src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" />
-            <label htmlFor="my-drawer-2" className="btn btn-ghost drawer-button lg:hidden">
-                <svg fill="none" className=" w-8 p-0 text-white" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-            </label>
 
-        </div>
         <div className="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content p-8">
@@ -27,6 +19,11 @@ export default function Layout() {
                     {/* <!-- Sidebar content here --> */}
                     {/* <img className=" h-28" src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" /> */}
                     <div>
+                        <div className=" pl-6">
+                            <img className="h-120 " src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" />
+                        </div>
+                        <li className=" px-12 my-6"></li>
+
                         <div tabindex="0" class="avatar w-full p-20 py-0">
                             <div class="w-full rounded-full">
                                 <img src="https://i.guim.co.uk/img/media/c5e73ed8e8325d7e79babf8f1ebbd9adc0d95409/2_5_1754_1053/master/1754.jpg?width=620&quality=45&dpr=2&s=none" />
@@ -73,6 +70,7 @@ export default function Layout() {
                                 Histories
                             </NavLink>
                         </li>
+                        <li className=" px-12"></li>
 
                     </div>
                 </ul>

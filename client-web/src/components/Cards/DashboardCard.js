@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom"
 
 export default function DashboardCard() {
     return (
-        <div className="h-24 my-4 rounded-xl p-2 w-full flex items-center bg-[#eafdfc]">
+        <div className="h-24 my-4 rounded-xl p-2 w-full flex items-center bg-[#eafdfc] shadow-md">
             <div className="  p-4 w-5/12 ">
                 <div className=" font-semibold text-[#567096] duration-200">
                     <NavLink to="pet/1" className=" hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 duration-200 active:text-[#ff9787] select-none  w-fit">

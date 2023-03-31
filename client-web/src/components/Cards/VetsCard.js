@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom"
 
 export default function VetsCard() {
     return (
-        <div className=" h-28 my-4 rounded-xl p-2 w-full flex items-center bg-[#eafdfc]">
+        <div className=" shadow-md h-28 my-4 rounded-xl p-2 w-full flex items-center bg-[#eafdfc]">
             <div className="  p-4 w-5/12 ">
                 <div className=" font-semibold text-[#567096] duration-200 flex items-center">
                     <div class="avatar w-4/12">

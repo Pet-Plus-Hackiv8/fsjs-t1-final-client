@@ -1,23 +1,27 @@
-export default function PostsCard() {
+import { NavLink } from "react-router-dom";
+
+export default function HistoryCard() {
     return (
-        <div className=" shadow-md h-24 my-4 rounded-xl p-2 w-full flex items-center bg-[#eafdfc]">
-            <div className="  p-4 w-5/12 ">
-                <div className="font-semibold">
-                    How to Train Your Dragon
-                </div>
+        <div className=" shadow-md h-24 my-4 rounded-xl p-2 w-full flex justify-around items-center bg-[#eafdfc]">
+            <div className=" pl-6 w-2/12  ">
+                1
             </div>
-            <div className=" w-2/12">
-                3 February 2023
+            <div className=" w-3/12">
+                <NavLink to="/pet/1" className=" font-semibold text-[#567096] duration-200 w-fit hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 active:text-[#ff9787] select-none">
+                    Randy
+                </NavLink>
             </div>
-            <div className=" w-2/12">
-                <span className=" bg-green-200 p-4 pt-1 pb-2 rounded-full">
+
+            <div className=" w-3/12">
+                January 2023
+                {/* <span className=" bg-green-200 p-4 pt-1 pb-2 rounded-full">
                     active
-                </span>
+                </span> */}
                 {/* <span className=" bg-amber-200 p-4 pt-1 pb-2 rounded-full">
                     archived
                 </span> */}
             </div>
-            <div className="  w-2/12">
+            <div className="  w-3/12">
                 <span className=" bg-sky-200 p-2 px-6 pt-1 pb-2 rounded-full">
                     view
                 </span>
