@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
+import { createBrowserRouter} from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./views/Dashboard";
 import History from "./views/History";
