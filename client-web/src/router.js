@@ -1,6 +1,7 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./views/Dashboard";
+import History from "./views/History";
 import PetDetail from "./views/PetDetail";
 import Posts from "./views/Posts";
 import VetDetail from "./views/VetDetail";
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "histories",
-                element: <>histories</>
+                element: <History />
             },
             {
                 path: "profile",
