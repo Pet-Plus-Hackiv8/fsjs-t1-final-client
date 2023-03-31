@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom"
+
 export default function VetsCard() {
     return (
         <div className=" h-28 my-4 rounded-xl p-2 w-full flex items-center bg-[#eafdfc]">
@@ -8,9 +10,9 @@ export default function VetsCard() {
                             <img className=" hover:scale-150 duration-1000" src="https://media.licdn.com/dms/image/C5603AQHwlQQLtX2_kA/profile-displayphoto-shrink_400_400/0/1659336939908?e=1685577600&v=beta&t=_h3SZWxAoCcQzu6-wI-hCaAm2oNzIEmyfDaHDKo3PLs" alt="Avatar Tailwind CSS Component" />
                         </div>
                     </div>
-                    <div className=" hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 duration-200 active:text-[#ff9787] select-none  w-fit">
+                    <NavLink to="/veterinarians/1" className=" hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 duration-200 active:text-[#ff9787] select-none  w-fit">
                         Drh. Bedul
-                    </div>
+                    </NavLink>
                 </div>
             </div>
             <div className="  w-6/12">
