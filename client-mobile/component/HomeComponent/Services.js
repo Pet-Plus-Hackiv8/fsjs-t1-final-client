@@ -58,7 +58,7 @@ export default function Services() {
 
 const styles = StyleSheet.create({
   mainView: {
-    marginVertical: 10,
+    marginVertical: 5,
     marginHorizontal: 20,
     display: "flex",
     flexDirection: "row",

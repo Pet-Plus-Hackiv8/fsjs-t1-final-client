@@ -1,9 +1,9 @@
 import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
-import Services from "../component/Home/Services";
-import Event from "../component/Home/Event";
-import GoodDeals from "../component/Home/GoodDeals";
+import Services from "../component/HomeComponent/Services";
+import Event from "../component/HomeComponent/Event";
+import GoodDeals from "../component/HomeComponent/GoodDeals";
 
 const yScreen = Dimensions.get("window").height;
 

@@ -4,7 +4,7 @@ export default function GoodDeals() {
   return (
     <>
       <Text style={{ fontSize: 20, fontWeight: "700", color: "#4B8CA1", marginLeft: 10 }}>Good Deals</Text>
-      <ScrollView horizontal={true} style={styles.container}>
+      <ScrollView horizontal={true} style={styles.container} showsHorizontalScrollIndicator={false}>
         <View style={styles.gaps}>
           <TouchableOpacity style={styles.ShadowView}>
             <Image style={styles.imageSize} source={{ uri: "https://img.freepik.com/free-vector/sale-banner-pet-shop-isometric-with-man-feeding-dog-near-dog-food-rack-with-text_1284-54089.jpg" }} />
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 3,
   },
   ShadowView: {
-    elevation: 10,
+    elevation: 5,
     borderRadius: 35,
   },
 });

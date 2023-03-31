@@ -4,7 +4,7 @@ export default function Event() {
   return (
     <View>
       <Text style={{ fontSize: 20, fontWeight: "700", color: "#4B8CA1", marginLeft: 10 }}>Event</Text>
-      <ScrollView horizontal={true} style={styles.eventMainView}>
+      <ScrollView horizontal={true} style={styles.eventMainView} showsHorizontalScrollIndicator={false}>
         <View>
           <Image style={{ width: 300, height: 200, resizeMode: "contain" }} source={{ uri: "https://i.ibb.co/RgD6D5s/image.png" }} />
         </View>
@@ -21,7 +21,7 @@ export default function Event() {
 
 const styles = StyleSheet.create({
   eventMainView: {
-    marginVertical: 10,
+    marginVertical: 5,
     marginLeft: 10,
     display: "flex",
     flexDirection: "row",
