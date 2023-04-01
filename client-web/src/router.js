@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
 import OwnerInfo from "./components/OwnerInfo";
 import ClinicProfile from "./views/ClinicProfile";
+import CreateInvoice from "./views/CreateInvoice";
 import Dashboard from "./views/Dashboard";
 import History from "./views/History";
 import PetDetail from "./views/PetDetail";
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
                         element: <>Appointment history</>
                     }
                 ]
+            },
+            {
+                path: "/invoice/:id",
+                element: <CreateInvoice />
             }
 
         ]

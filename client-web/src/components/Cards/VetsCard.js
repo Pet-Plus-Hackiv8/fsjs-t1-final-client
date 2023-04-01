@@ -6,8 +6,8 @@ export default function VetsCard() {
             <div className="  p-4 w-5/12 ">
                 <div className=" font-semibold text-[#567096] duration-200 flex items-center">
                     <div className="avatar w-4/12">
-                        <div className="mask mask-squircle w-20 h-20 hover:scale-110 duration-1000">
-                            <img className=" hover:scale-150 duration-1000" src="https://images.ctfassets.net/rt5zmd3ipxai/0stMAHytHj2enLmAroKbh/5e73db26112b9e2c3257c7dbae81ec66/IMG_5395.c50e7600bcc175511c722c4dcc4ddad5.jpg" alt="Avatar Tailwind CSS Component" />
+                        <div className="mask mask-squircle w-20 h-20">
+                            <img className="" src="https://images.ctfassets.net/rt5zmd3ipxai/0stMAHytHj2enLmAroKbh/5e73db26112b9e2c3257c7dbae81ec66/IMG_5395.c50e7600bcc175511c722c4dcc4ddad5.jpg" alt="Avatar Tailwind CSS Component" />
                         </div>
                     </div>
                     <NavLink to="/veterinarians/1" className=" hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 duration-200 active:text-[#ff9787] select-none  w-fit">
