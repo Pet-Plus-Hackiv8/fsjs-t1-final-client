@@ -7,7 +7,7 @@ export default function HistoryCard() {
                 1
             </div>
             <div className=" w-3/12">
-                <NavLink to="/pet/1" className=" font-semibold text-[#567096] duration-200 w-fit hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 active:text-[#ff9787] select-none">
+                <NavLink to="/pet/history/1" className=" font-semibold text-[#567096] duration-200 w-fit hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 active:text-[#ff9787] select-none">
                     Randy
                 </NavLink>
             </div>

@@ -1,5 +1,7 @@
-import { createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
+import OwnerInfo from "./components/OwnerInfo";
+import ClinicProfile from "./views/ClinicProfile";
 import Dashboard from "./views/Dashboard";
 import History from "./views/History";
 import PetDetail from "./views/PetDetail";
@@ -13,32 +15,42 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
             {
-                path: "",
+                path: "/",
                 element: < Dashboard />
             },
             {
-                path: "posts",
+                path: "/posts",
                 element: <Posts />
             },
             {
-                path: "veterinarians",
+                path: "/veterinarians",
                 element: <Veterinarians />
             },
             {
-                path: "histories",
+                path: "/histories",
                 element: <History />
             },
             {
-                path: "profile",
-                element: <>profile</>
+                path: "/profile",
+                element: <ClinicProfile />
             },
             {
-                path: "veterinarians/:id",
+                path: "/veterinarians/:id",
                 element: <VetDetail />
             },
             {
-                path: "pet/:id",
-                element: <PetDetail />
+                path: "/pet",
+                element: <PetDetail />,
+                children: [
+                    {
+                        path: "owner/:id",
+                        element: <OwnerInfo />
+                    },
+                    {
+                        path: "history/:id",
+                        element: <>Appointment history</>
+                    }
+                ]
             }
 
         ]
