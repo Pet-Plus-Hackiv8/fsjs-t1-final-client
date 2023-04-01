@@ -16,7 +16,7 @@ export default function Layout() {
         </div>
         <div className="drawer  drawer-mobile ">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content md:p-8 p-8 pt-28 ">
+            <div className="drawer-content md:p-6 p-6 pt-28 ">
                 {/* <!-- Page content here --> */}
                 <Outlet />
             </div>
