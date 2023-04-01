@@ -7,7 +7,7 @@ export default function Veterinarians() {
                 <div className="text-xl pb-4 font-bold outline-1 outline-black text-[#ff9787]">
                     Our Veterinarians
                 </div>
-                <label className=" flex font-semibold hover:cursor-pointer p-2 px-4 rounded-md bg-[#ff9787] hover:bg-[#ffa99b] active:bg-[#ff9787] active:scale-95 duration-200 ">
+                <label className=" flex font-semibold hover:cursor-pointer py-4 px-4  rounded-md bg-[#ff9787] hover:bg-[#ffa99b] active:bg-[#ff9787] active:scale-95 duration-200 ">
                     <span className=" select-none">
                         Veterinarian
                     </span>

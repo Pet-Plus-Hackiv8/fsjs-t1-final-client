@@ -1,15 +1,27 @@
+import { Outlet } from "react-router"
+import { NavLink } from "react-router-dom"
+
+
 export default function PetDetail() {
     return (
-        <div className="flex w-full justify-center gap-16 flex-col md:flex-row">
+        <div className="flex w-full md:ml-20 gap-16 flex-col md:flex-row">
             <div className=" w-full md:w-4/12 bg-[#bfeaf5] rounded-md">
                 <div>
-                    <img className=" rounded-t-md w-full h-72 object-cover" src="https://chico.ca.us/sites/main/files/imagecache/lightbox/main-images/dog_license.jpg" />
+                    <img className=" rounded-t-md w-full h-72 object-cover" src="https://cdn.openai.com/labs/images/A%20Shiba%20Inu%20dog%20wearing%20a%20beret%20and%20black%20turtleneck.webp?v=1" />
                 </div>
 
                 <div className=" pt-2">
                     <div className="flex w-full">
                         <div className=" w-1/2 p-2 pl-8 text-lg font-semibold text-[#6ba0cc]">
-                            Species :
+                            Name :
+                        </div>
+                        <div className=" w-1/2 p-2 text-lg font-semibold ">
+                            Woof
+                        </div>
+                    </div>
+                    <div className="flex w-full">
+                        <div className=" w-1/2 p-2 pl-8 text-lg font-semibold text-[#6ba0cc]">
+                            Species: :
                         </div>
                         <div className=" w-1/2 p-2 text-lg font-semibold ">
                             Dog
@@ -52,30 +64,25 @@ export default function PetDetail() {
                             Description:
                         </div>
                         <div className=" p-8 pt-0">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, t enim ad minim veniam.
                         </div>
                     </div>
                 </div>
             </div>
             <div className=" w-full md:w-5/12 bg-[#bfeaf5] flex flex-col rounded-md">
-                <div className=" w-full bg-[#91d8e4] p-4 text-xl font-bold text-[#40526f]">
-                    Owner's Info
+                <div className=" w-full bg-[#608f97] text-xl font-bold text-[#40526f] flex">
+                    <NavLink to="/pet/owner/1" className=" w-1/2 h-full  hover:bg-[#91d8e4] p-4"  >
+                        <div className=" flex justify-center">
+                            Owner's Info
+                        </div>
+                    </NavLink>
+                    <NavLink to="/pet/history/1" className=" w-1/2 h-full hover:bg-[#91d8e4] p-4" >
+                        <div className=" flex justify-center">
+                            Appointment History
+                        </div>
+                    </NavLink>
                 </div>
-                <div className=" p-4 text-lg font-semibold">
-                    Name : Zio Kandaka
-                </div>
-                <div className=" p-4 text-lg font-semibold" >
-                    Contact Number : 08129412702
-                </div>
-                <div  className=" p-4 text-lg font-semibold">
-                    Email : zio_kandaka@mail.com
-                </div>
-                <div className=" p-4 text-lg font-semibold">
-                    Address : Bekasi
-                </div>
-                <div className=" p-4 text-lg font-semibold">
-                    Past Records :
-                </div>
+                <Outlet />
             </div>
         </div>
     )

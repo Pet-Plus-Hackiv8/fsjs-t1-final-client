@@ -6,26 +6,33 @@ export default function Layout() {
         navigate(page)
     }
     return (<>
-
-        <div className="drawer drawer-mobile">
+        <div className="navbar md:hidden absolute z-50 top-0 bg-[#2d3748] flex justify-between">
+            <img className="h-16 ml-[4.6rem]" src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" />
+            <label htmlFor="my-drawer-2" className="btn btn-ghost drawer-button lg:hidden">
+                <svg fill="none" className=" w-8 p-0 text-white" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </label>
+        </div>
+        <div className="drawer  drawer-mobile ">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content p-8">
+            <div className="drawer-content md:p-8 p-8 pt-28 ">
                 {/* <!-- Page content here --> */}
                 <Outlet />
             </div>
-            <div className="drawer-side ">
+            <div className="drawer-side shadow-md">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 bg-[#eafdfc] text-base-content">
+                <ul className="menu p-4 w-80 bg-[#eafdfc] text-base-content ">
                     {/* <!-- Sidebar content here --> */}
                     {/* <img className=" h-28" src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" /> */}
                     <div>
                         <div className=" pl-6">
-                            <img className="h-120 " src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" />
+                            <img className="h-120  hidden md:block" src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" />
                         </div>
                         <li className=" px-12 my-6"></li>
 
-                        <div tabindex="0" class="avatar w-full p-20 py-0">
-                            <div class="w-full rounded-full">
+                        <div tabIndex="0" className="avatar w-full p-20 py-0">
+                            <div className="w-full rounded-full">
                                 <img src="https://i.guim.co.uk/img/media/c5e73ed8e8325d7e79babf8f1ebbd9adc0d95409/2_5_1754_1053/master/1754.jpg?width=620&quality=45&dpr=2&s=none" />
                             </div>
                         </div>
@@ -72,6 +79,14 @@ export default function Layout() {
                         </li>
                         <li className=" px-12"></li>
 
+                        <li>
+                            <NavLink to="/histories" className={({ isActive }) => isActive ? "font-bold bg-transparent active:bg-[#ff9787] active:text-[#272822]" : "active:bg-[#ff9787] active:text-[#272822] "} >
+                                <svg fill="none" className="w-8 p-0"  stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path>
+                                </svg>
+                                Log out
+                            </NavLink>
+                        </li>
                     </div>
                 </ul>
 
