@@ -38,7 +38,7 @@ export default function ClinicProfile() {
                 </div>
             </div>
             <div className=" bg-white p-4 h-[34.7rem] rounded-xl ">
-                <div className="text-xl pb-4 font-bold outline-1 outline-black text-[#ff9787] ">
+                <div className="text-3xl pb-4 font-bold outline-1 outline-black text-[#ff9787] ">
                     Appointment list
                 </div>
                 <DashboardTable />

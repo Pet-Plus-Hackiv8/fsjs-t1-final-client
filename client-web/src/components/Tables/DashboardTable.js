@@ -1,4 +1,4 @@
-import DashboardCard from "../Cards/DashboardCard"
+import DashboardCard from "../Cards/DashboardCard.js"
 
 export default function DashboardTable() {
     return (

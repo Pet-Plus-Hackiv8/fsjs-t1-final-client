@@ -50,8 +50,8 @@ export default function CreateClinic() {
                         : 'suggestion-item p-2';
                     // inline style for demonstration purpose
                     const style = suggestion.active
-                        ? { backgroundColor: '#fafafa', cursor: 'pointer'}
-                        : { backgroundColor: '#eeeeee', cursor: 'pointer'};
+                        ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                        : { backgroundColor: '#eeeeee', cursor: 'pointer' };
                     return (
                         <div
                             {...getSuggestionItemProps(suggestion, {
@@ -80,10 +80,14 @@ export default function CreateClinic() {
                             <li><label className=" link cursor-default font-semibold"> Manage Clinic</label></li>
                         </ul>
                     </div>
-                    <form className=" mt-4">
+                    <form className=" mt-2">
                         <div>
                             <div className=" py-2"> Name :</div>
                             <input type="text" placeholder="Enter your clinic name" className="input input-bordered input-secondary w-full " />
+                        </div>
+                        <div>
+                            <div className=" py-2"> Contact Number :</div>
+                            <input type="text" placeholder="Enter your clinic's contact number" className="input input-bordered input-secondary w-full " />
                         </div>
                         <div className="">
                             <div className=" py-2"> Address :</div>
@@ -95,17 +99,18 @@ export default function CreateClinic() {
                             >
                                 {renderFunc}
                             </PlacesAutocomplete>
-
                         </div>
-                        <div>
-                            <div className=" py-2"> Contact Number :</div>
-                            <input type="text" placeholder="Enter your clinic's contact number" className="input input-bordered input-secondary w-full " />
+                        <div className="">
+                            <div className=" py-2">
+                                Logo :
+                            </div>
+                            <input type="file" className="file-input file-input-bordered file-input-secondary w-full" />
                         </div>
-                        <label className=" mt-6 flex justify-center font-semibold hover:cursor-pointer py-3 px-4 w-full rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
+                        <button type="submit" className=" mt-6 flex justify-center font-semibold hover:cursor-pointer py-3 px-4 w-full rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
                             <span className=" select-none">
                                 Register Clinic
                             </span>
-                        </label>
+                        </button >
                     </form>
                 </div>
                 <div className=" rounded-r-md  w-1/2 border-l-2 bg-gray-700  flex justify-center items-center">
