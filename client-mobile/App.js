@@ -2,14 +2,38 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { BottomTabBar, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
 import Pets from "./screens/Pets";
 import Clinic from "./screens/Clinic";
+import DetailPet from "./screens/DetailPet";
 
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const config = {
+  animation: "spring",
+  config: {
+    stiffness: 1000,
+    damping: 5000,
+    mass: 1,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
+};
+
+function PetStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="petsTab" component={Pets} options={{ headerShown: false }} />
+      <Stack.Screen name="petsTabDetail" component={DetailPet} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   const navOption = ({ route }) => ({
@@ -51,7 +75,7 @@ export default function App() {
           <Tab.Navigator screenOptions={navOption}>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Clinic" component={Clinic} />
-            <Tab.Screen name="Pets" component={Pets} />
+            <Tab.Screen name="Pets" component={PetStack} />
             <Tab.Screen name="Profile" component={Profile} />
           </Tab.Navigator>
         </NavigationContainer>

@@ -1,21 +1,23 @@
-import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
 import Services from "../component/HomeComponent/Services";
 import Event from "../component/HomeComponent/Event";
 import GoodDeals from "../component/HomeComponent/GoodDeals";
+import { useNavigation } from "@react-navigation/native";
 
 const yScreen = Dimensions.get("window").height;
 
 export default function Home() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View>
         <View style={styles.topHome}>
-          <View style={styles.profile}>
+          <TouchableOpacity style={styles.profile} onPress={() => navigation.navigate("Profile")}>
             <Image style={styles.profileImage} source={{ uri: "https://media.giphy.com/media/ZE6Aa9S2ViLVhqNqL2/giphy.gif" }} />
             <Text style={styles.profileName}>Zio Kandakha </Text>
-          </View>
+          </TouchableOpacity>
           <View style={styles.profileLocation}>
             <Text style={styles.profileName}>Kebayoran... </Text>
             <Ionicons name={"location-outline"} size={20} style={{ elevation: 5, shadowColor: "#000" }} />
