@@ -1,6 +1,7 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import Layout from "./components/Layout";
 import OwnerInfo from "./components/OwnerInfo";
+import Chat from "./views/Chat";
 import ClinicProfile from "./views/ClinicProfile";
 import CreateClinic from "./views/CreateClinic";
 import CreateInvoice from "./views/CreateInvoice";
@@ -59,7 +60,11 @@ const router = createBrowserRouter([
             {
                 path: "/invoice/:id",
                 element: <CreateInvoice />
-            }
+            },
+            {
+                path: "/chat",
+                element: <Chat />
+            },
         ],
         loader: () => {
             if (!localStorage.getItem("access_token")) {

@@ -19,7 +19,7 @@ export default function Posts() {
                 </label>
             </div>
             <PostsTable />
-            {/* add service modal */}
+            {/* add post modal */}
             <div>
                 <input type="checkbox" id="post_modal" className="modal-toggle" />
                 <div className="modal">
@@ -29,14 +29,14 @@ export default function Posts() {
                             <label>
                                 Title :
                             </label>
-                            <input type="text" placeholder="Enter service name" className=" my-2 input input-secondary input-bordered w-full" />
+                            <input type="text" placeholder="Enter post title" className=" my-2 input input-secondary input-bordered w-full" />
                             <div className=" flex flex-col ">
                                 <label> Content: </label>
                                 <textarea className="textarea my-2 textarea-secondary h-32" placeholder="Enter post content"></textarea>
                             </div>
                             <div className=" flex flex-col">
-                                <label> Image Url : </label>
-                                <input type="text" placeholder="Enter Image Url" className=" my-2 input input-secondary input-bordered w-full" />
+                                <label> Image URL : </label>
+                                <input type="text" placeholder="Enter Image URL" className=" my-2 input input-secondary input-bordered w-full" />
                             </div>
                             <div className=" flex justify-end gap-4 mt-4">
                                 <label htmlFor="post_modal" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">

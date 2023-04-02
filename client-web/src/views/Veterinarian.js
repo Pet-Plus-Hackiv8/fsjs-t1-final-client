@@ -7,7 +7,7 @@ export default function Veterinarians() {
                 <div className="text-3xl pb-4 font-bold outline-1 outline-black text-[#ff9787]">
                     Our Veterinarians
                 </div>
-                <label className=" flex font-semibold hover:cursor-pointer py-4 px-4  rounded-md bg-[#ff9787] hover:bg-[#ffa99b] active:bg-[#ff9787] active:scale-95 duration-200 ">
+                <label htmlFor="doctor_modal" className=" flex font-semibold hover:cursor-pointer py-4 px-4  rounded-md bg-[#ff9787] hover:bg-[#ffa99b] active:bg-[#ff9787] active:scale-95 duration-200 ">
                     <span className=" mr-2">
                         <svg fill="none" className=" w-6 p-0" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
@@ -18,8 +18,56 @@ export default function Veterinarians() {
                     </span>
                 </label>
             </div>
-
             <VetsTable />
+            {/* add doctor modal */}
+            <div>
+                <input type="checkbox" id="doctor_modal" className="modal-toggle" />
+                <div className="modal">
+                    <div className="modal-box ml-72 p-4">
+                        <form>
+                            <h3 className="text-xl font-bold mb-4">Add a doctor</h3>
+                            <label>
+                                Name :
+                            </label>
+                            <input type="text" placeholder="Enter doctor name" className=" my-2 input input-bordered w-full input-secondary" />
+                            <div className=" flex flex-col">
+                                <label> Profile Picture URL : </label>
+                                <input type="text" placeholder="Enter image URL" className=" my-2 input input-bordered w-full input-secondary" />
+                            </div>
+                            <div className=" flex  gap-2">
+                                <div>
+                                    <label>
+                                        Gender :
+                                    </label>
+                                    <select className="select select-secondary w-full max-w-xs my-2">
+                                        <option disabled selected>Select a gender </option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>
+                                        Education :
+                                    </label>
+                                    <input type="text" placeholder="Enter doctor's education" className=" my-2 input input-bordered w-full input-secondary" />
+                                </div>
+                            </div>
+                            <div className=" flex justify-end gap-4 mt-4">
+                                <label htmlFor="doctor_modal" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">
+                                    <span className=" select-none">
+                                        Cancel
+                                    </span>
+                                </label>
+                                <label typeof="submit" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
+                                    <span className=" select-none">
+                                        Done
+                                    </span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
