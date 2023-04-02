@@ -143,6 +143,7 @@ export default function CreateInvoice() {
                         </div>
                     </div>
                 </div>
+                {/* action modal */}
                 <div>
                     <input type="checkbox" id="action_modal" className="modal-toggle" />
                     <div className="modal ml-64">

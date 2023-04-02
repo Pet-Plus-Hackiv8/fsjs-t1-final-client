@@ -90,7 +90,7 @@ export default function EditClinic() {
                 <div className="flex bg-[#eafdfc] shadow-md  h-2/3 p-4 rounded-md">
                     <form onSubmit={handleSubmit} className="flex gap-4 flex-col w-full">
                         <div className=" text-2xl font-bold">
-                            Edit Clinic Info
+                            Edit Info
                         </div>
                         <div>
                             <label>
@@ -140,7 +140,7 @@ export default function EditClinic() {
                         Service List
                     </div>
                     <div>
-                        <label className=" flex font-semibold hover:cursor-pointer py-4 px-4  rounded-md bg-[#ff9787] hover:bg-[#ffa99b] active:bg-[#ff9787] active:scale-95 duration-200 ">
+                        <label htmlFor="service_modal" className=" flex font-semibold hover:cursor-pointer py-4 px-4  rounded-md bg-[#ff9787] hover:bg-[#ffa99b] active:bg-[#ff9787] active:scale-95 duration-200 ">
                             <span className=" mr-2">
                                 <svg fill="none" stroke="currentColor" className=" p-0 w-6 items-center flex" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -153,6 +153,53 @@ export default function EditClinic() {
                     </div>
                 </div>
                 <ServiceTable />
+            </div>
+            <div>
+                {/* add service modal */}
+                <div>
+                    <input type="checkbox" id="service_modal" className="modal-toggle" />
+                    <div className="modal">
+                        <div className="modal-box ml-72 p-4">
+                            <form>
+                                <h3 className="text-xl font-bold mb-4">Add Service</h3>
+                                <label>
+                                    Name :
+                                </label>
+                                <input type="text" placeholder="Enter service name" className=" my-2 input input-bordered w-full" />
+                                <div className=" flex  gap-2">
+                                    <div>
+                                        <label>
+                                            Min Price :
+                                        </label>
+                                        <input type="number" placeholder="Enter minimum price" className=" my-2 input input-bordered w-full" />
+                                    </div>
+                                    <div>
+                                        <label>
+                                            Max Price :
+                                        </label>
+                                        <input type="number" placeholder="Enter maximum price" className=" my-2 input input-bordered w-full" />
+                                    </div>
+                                </div>
+                                <div className=" flex flex-col">
+                                    <label> Logo : </label>
+                                    <input type="file" className=" my-2 file-input file-input-bordered file-input-secondary w-full " />
+                                </div>
+                                <div className=" flex justify-end gap-4 mt-4">
+                                    <label htmlFor="service_modal" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">
+                                        <span className=" select-none">
+                                            Cancel
+                                        </span>
+                                    </label>
+                                    <label typeof="submit" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
+                                        <span className=" select-none">
+                                            Done
+                                        </span>
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

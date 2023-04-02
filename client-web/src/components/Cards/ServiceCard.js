@@ -1,6 +1,6 @@
 export default function ServiceCard() {
     return (
-        <div className=" flex bg-white w-full my-4 p-4 rounded-xl shadow-md">
+        <div className=" flex bg-white select-none w-full my-4 p-4 rounded-xl shadow-md">
             <div className="flex w-1/6">
                 <img className=" h-16" src="https://cdn.discordapp.com/attachments/1054692655327613008/1091190714219638904/dog.png" />
             </div>
@@ -22,7 +22,7 @@ export default function ServiceCard() {
                     </svg>
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-32">
                         <li>
-                            <label>
+                            <label htmlFor="edit_service1">
                                 Edit
                             </label>
                         </li>
@@ -32,6 +32,51 @@ export default function ServiceCard() {
                             </label>
                         </li>
                     </ul>
+                </div>
+            </div>
+            {/* add service modal */}
+            <div>
+                <input type="checkbox" id="edit_service1" className="modal-toggle" />
+                <div className="modal">
+                    <div className="modal-box ml-72 p-4">
+                        <form>
+                            <h3 className="text-xl font-bold mb-4">Edit Service</h3>
+                            <label>
+                                Name :
+                            </label>
+                            <input type="text" placeholder="Enter service name" className=" my-2 input input-bordered w-full" />
+                            <div className=" flex  gap-2">
+                                <div>
+                                    <label>
+                                        Min Price :
+                                    </label>
+                                    <input type="number" placeholder="Enter minimum price" className=" my-2 input input-bordered w-full" />
+                                </div>
+                                <div>
+                                    <label>
+                                        Max Price :
+                                    </label>
+                                    <input type="number" placeholder="Enter maximum price" className=" my-2 input input-bordered w-full" />
+                                </div>
+                            </div>
+                            <div className=" flex flex-col">
+                                <label> Logo : </label>
+                                <input type="file" className=" my-2 file-input file-input-bordered file-input-secondary w-full " />
+                            </div>
+                            <div className=" flex justify-end gap-4 mt-4">
+                                <label htmlFor="edit_service1" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">
+                                    <span className=" select-none">
+                                        Cancel
+                                    </span>
+                                </label>
+                                <label typeof="submit" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
+                                    <span className=" select-none">
+                                        Done
+                                    </span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

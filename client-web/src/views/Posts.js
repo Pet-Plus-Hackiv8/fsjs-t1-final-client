@@ -3,7 +3,7 @@ import PostsTable from "../components/Tables/PostsTable";
 export default function Posts() {
     return (
         <>
-            <div className=" flex justify-between items-center">
+            <div className=" flex justify-between items-center ">
                 <div className="text-3xl pb-4 font-bold outline-1 outline-black text-[#ff9787]">
                     Clinic Posts
                 </div>
