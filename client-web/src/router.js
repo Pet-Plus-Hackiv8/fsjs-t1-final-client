@@ -1,12 +1,15 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import Layout from "./components/Layout";
 import OwnerInfo from "./components/OwnerInfo";
 import ClinicProfile from "./views/ClinicProfile";
+import CreateClinic from "./views/CreateClinic";
 import CreateInvoice from "./views/CreateInvoice";
 import Dashboard from "./views/Dashboard";
 import History from "./views/History";
+import Login from "./views/Login";
 import PetDetail from "./views/PetDetail";
 import Posts from "./views/Posts";
+import Register from "./views/Register";
 import VetDetail from "./views/VetDetail";
 import Veterinarians from "./views/Veterinarian";
 
@@ -57,12 +60,44 @@ const router = createBrowserRouter([
                 path: "/invoice/:id",
                 element: <CreateInvoice />
             }
-
-        ]
+        ],
+        loader: () => {
+            if (!localStorage.getItem("access_token")) {
+                return redirect("/login")
+            }
+            return null
+        },
     },
     {
         path: "/login",
-        element: <>Login</>
+        element: <Login />,
+        loader: () => {
+            if (localStorage.getItem("access_token")) {
+                return redirect('/')
+            }
+            return null
+        }
+    },
+    {
+        path: "/register",
+        element: <Register />,
+        loader: () => {
+            if (localStorage.getItem("access_token")) {
+                return redirect('/')
+            }
+            return null
+        }
+    },
+    {
+        path: "/register/clinic",
+        element: <CreateClinic />,
+        loader: () => {
+            if (localStorage.getItem("access_token")) {
+                return redirect('/')
+            }
+            return null
+        }
     }
+
 ])
 export default router

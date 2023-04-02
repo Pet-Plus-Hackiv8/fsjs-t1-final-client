@@ -123,7 +123,7 @@ export default function CreateInvoice() {
                 <div>
                     <input type="checkbox" id="note_modal" className="modal-toggle" />
                     <div className="modal">
-                        <div className="modal-box ml-60">
+                        <div className="modal-box ml-60 p-4">
                             <form>
                                 <h3 className="text-lg font-bold">Notes :</h3>
                                 <textarea className="textarea textarea-secondary w-full my-4 h-60" placeholder="Doctor's notes ..."></textarea>
@@ -145,13 +145,13 @@ export default function CreateInvoice() {
                 </div>
                 <div>
                     <input type="checkbox" id="action_modal" className="modal-toggle" />
-                    <div className="modal  ml-64">
-                        <div className="modal-box relative">
+                    <div className="modal ml-64">
+                        <div className="modal-box relative p-4">
                             <h3 className="text-lg font-bold">Add Action</h3>
                             <form className="flex flex-col w-full">
-                                <div className=" flex gap-4 my-4">
-                                    <div>
-                                        <label>
+                                <div className=" flex gap-4 mb-4 mt-2">
+                                    <div className=" flex flex-col gap-2 w-1/2">
+                                        <label className=" font-semibold">
                                             Select Service
                                         </label>
                                         <select className="select select-bordered w-full">
@@ -160,11 +160,11 @@ export default function CreateInvoice() {
                                             <option>Greedo</option>
                                         </select>
                                     </div>
-                                    <div>
-                                        <label>
+                                    <div className=" flex flex-col gap-2 w-1/2">
+                                        <label className=" font-semibold">
                                             Price
                                         </label>
-                                        <input type="text" placeholder="Type here" className="input input-bordered input-secondary w-full" />
+                                        <input type="number" placeholder="Type here" className="input input-bordered input-secondary w-full" />
                                     </div>
                                 </div>
                                 <div className=" flex justify-between">

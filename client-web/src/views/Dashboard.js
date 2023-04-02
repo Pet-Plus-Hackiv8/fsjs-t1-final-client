@@ -2,7 +2,7 @@ import DashboardTable from "../components/Tables/DashboardTable"
 
 export default function ClinicProfile() {
     return (
-        <div className=" w-full h-full gap-2 flex flex-col bg-[#eafdfc] p-4 rounded-md shadow-md">
+        <div className=" w-full h-full gap-2 flex flex-col rounded-md ">
             <div className=" w-full flex gap-4 flex-wrap justify-between py-4 ">
                 <div className=" md:w-1/5 w-full bg-rose-100 p-8 rounded-xl shadow-md">
                     <div className=" w-full text-lg font-semibold">
@@ -37,7 +37,7 @@ export default function ClinicProfile() {
                     </div>
                 </div>
             </div>
-            <div className=" bg-white p-4 h-[34.7rem] rounded-xl shadow-md">
+            <div className=" bg-white p-4 h-[34.7rem] rounded-xl ">
                 <div className="text-xl pb-4 font-bold outline-1 outline-black text-[#ff9787] ">
                     Appointment list
                 </div>

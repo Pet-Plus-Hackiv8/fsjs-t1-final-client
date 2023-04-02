@@ -5,6 +5,10 @@ export default function Layout() {
     const changePage = (page) => {
         navigate(page)
     }
+    const handleLogout = () => {
+        localStorage.removeItem("access_token");
+        changePage("/login")
+    }
     return (<>
         <div className="navbar md:hidden absolute z-50 top-0 bg-[#2d3748] flex justify-between">
             <img className="h-16 ml-[4.6rem]" src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" />
@@ -80,12 +84,12 @@ export default function Layout() {
                         <li className=" px-12"></li>
 
                         <li>
-                            <NavLink to="/histories" className={({ isActive }) => isActive ? "font-bold bg-transparent active:bg-[#ff9787] active:text-[#272822]" : "active:bg-[#ff9787] active:text-[#272822] "} >
-                                <svg fill="none" className="w-8 p-0"  stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path>
+                            <label onClick={handleLogout} className={({ isActive }) => isActive ? "font-bold bg-transparent active:bg-[#ff9787] active:text-[#272822]" : "active:bg-[#ff9787] active:text-[#272822] "} >
+                                <svg fill="none" className="w-8 p-0" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path>
                                 </svg>
                                 Log out
-                            </NavLink>
+                            </label>
                         </li>
                     </div>
                 </ul>
