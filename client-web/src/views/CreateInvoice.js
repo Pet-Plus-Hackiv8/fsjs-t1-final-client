@@ -155,7 +155,7 @@ export default function CreateInvoice() {
                                         <label className=" font-semibold">
                                             Select Service
                                         </label>
-                                        <select className="select select-bordered w-full">
+                                        <select className="select select-secondary select-bordered w-full">
                                             <option disabled selected>Service name</option>
                                             <option>Han Solo</option>
                                             <option>Greedo</option>

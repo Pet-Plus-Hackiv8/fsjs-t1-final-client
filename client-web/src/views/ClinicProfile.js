@@ -165,19 +165,19 @@ export default function EditClinic() {
                                 <label>
                                     Name :
                                 </label>
-                                <input type="text" placeholder="Enter service name" className=" my-2 input input-bordered w-full" />
+                                <input type="text" placeholder="Enter service name" className=" my-2 input input-bordered w-full input-secondary" />
                                 <div className=" flex  gap-2">
                                     <div>
                                         <label>
                                             Min Price :
                                         </label>
-                                        <input type="number" placeholder="Enter minimum price" className=" my-2 input input-bordered w-full" />
+                                        <input type="number" placeholder="Enter minimum price" className=" my-2 input input-bordered w-full input-secondary" />
                                     </div>
                                     <div>
                                         <label>
                                             Max Price :
                                         </label>
-                                        <input type="number" placeholder="Enter maximum price" className=" my-2 input input-bordered w-full" />
+                                        <input type="number" placeholder="Enter maximum price" className=" my-2 input input-bordered w-full input-secondary" />
                                     </div>
                                 </div>
                                 <div className=" flex flex-col">

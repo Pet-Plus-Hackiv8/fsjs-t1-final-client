@@ -22,7 +22,7 @@ export default function ServiceCard() {
                     </svg>
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-32">
                         <li>
-                            <label htmlFor="edit_service1">
+                            <label htmlFor="edit_service_1">
                                 Edit
                             </label>
                         </li>
@@ -34,9 +34,9 @@ export default function ServiceCard() {
                     </ul>
                 </div>
             </div>
-            {/* add service modal */}
+            {/* edit service modal */}
             <div>
-                <input type="checkbox" id="edit_service1" className="modal-toggle" />
+                <input type="checkbox" id="edit_service_1" className="modal-toggle" />
                 <div className="modal">
                     <div className="modal-box ml-72 p-4">
                         <form>
@@ -44,19 +44,19 @@ export default function ServiceCard() {
                             <label>
                                 Name :
                             </label>
-                            <input type="text" placeholder="Enter service name" className=" my-2 input input-bordered w-full" />
+                            <input type="text" placeholder="Enter service name" className=" my-2 input input-bordered w-full input-secondary" />
                             <div className=" flex  gap-2">
                                 <div>
                                     <label>
                                         Min Price :
                                     </label>
-                                    <input type="number" placeholder="Enter minimum price" className=" my-2 input input-bordered w-full" />
+                                    <input type="number" placeholder="Enter minimum price" className=" my-2 input input-bordered w-full input-secondary" />
                                 </div>
                                 <div>
                                     <label>
                                         Max Price :
                                     </label>
-                                    <input type="number" placeholder="Enter maximum price" className=" my-2 input input-bordered w-full" />
+                                    <input type="number" placeholder="Enter maximum price" className=" my-2 input input-bordered w-full input-secondary" />
                                 </div>
                             </div>
                             <div className=" flex flex-col">
@@ -64,7 +64,7 @@ export default function ServiceCard() {
                                 <input type="file" className=" my-2 file-input file-input-bordered file-input-secondary w-full " />
                             </div>
                             <div className=" flex justify-end gap-4 mt-4">
-                                <label htmlFor="edit_service1" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">
+                                <label htmlFor="edit_service_1" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">
                                     <span className=" select-none">
                                         Cancel
                                     </span>

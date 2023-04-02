@@ -27,9 +27,44 @@ export default function PostsCard() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                 </svg>
                 <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Edit</a></li>
+                    <li><label htmlFor="edit_post_1">Edit</label></li>
                     <li><a>Archive</a></li>
                 </ul>
+            </div>
+            {/* add service modal */}
+            <div>
+                <input type="checkbox" id="edit_post_1" className="modal-toggle" />
+                <div className="modal">
+                    <div className="modal-box ml-72 p-4">
+                        <form>
+                            <h3 className="text-xl font-bold mb-4">Edit Post</h3>
+                            <label>
+                                Title :
+                            </label>
+                            <input type="text" placeholder="Enter service name" className=" my-2 input input-secondary input-bordered w-full" />
+                            <div className=" flex flex-col ">
+                                <label> Content: </label>
+                                <textarea className="textarea my-2 textarea-secondary h-32" placeholder="Enter post content"></textarea>
+                            </div>
+                            <div className=" flex flex-col">
+                                <label> Image Url : </label>
+                                <input type="text" placeholder="Enter Image Url" className=" my-2 input input-secondary input-bordered w-full" />
+                            </div>
+                            <div className=" flex justify-end gap-4 mt-4">
+                                <label htmlFor="edit_post_1" className=" flex font-semibold justify-center  hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">
+                                    <span className=" select-none">
+                                        Cancel
+                                    </span>
+                                </label>
+                                <label typeof="submit" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
+                                    <span className=" select-none">
+                                        Done
+                                    </span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     )
