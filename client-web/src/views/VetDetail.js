@@ -30,6 +30,7 @@ export default function VetDetail() {
 
     const data = [
         {
+            "id": 1,   
             "day": "Monday",
             "time": "Session 2",
             "status": "Available",
@@ -37,6 +38,7 @@ export default function VetDetail() {
             "DoctorId": 1
         },
         {
+            "id": 2,   
             "day": "Saturday",
             "time": "Session 4",
             "status": "Unavailable",
@@ -44,6 +46,7 @@ export default function VetDetail() {
             "DoctorId": 1
         },
         {
+            "id": 3,   
             "day": "Wednesday",
             "time": "Session 8",
             "status": "On Leave",
@@ -51,6 +54,7 @@ export default function VetDetail() {
             "DoctorId": 1
         },
         {
+            "id": 4,   
             "day": "Saturday",
             "time": "Session 5",
             "status": "Unavailable",
