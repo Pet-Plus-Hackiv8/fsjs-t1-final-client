@@ -1,8 +1,13 @@
 export default function OwnerInfo() {
     return (
         <>
-            <div className=" p-4 text-lg font-semibold">
-                Owner Name : Zio Kandaka
+            <div className=" p-4 text-lg font-semibold flex">
+                <div className=" w-1/3">
+                    Owner Name
+                </div>
+                <div className="  w-1/3">
+                    : Zio Kandaka
+                </div>
             </div>
             <div className=" p-4 text-lg font-semibold" >
                 Contact Number : 08129412702

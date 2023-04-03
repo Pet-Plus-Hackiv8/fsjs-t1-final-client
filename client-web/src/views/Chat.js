@@ -1,17 +1,17 @@
 import Talk from 'talkjs';
 import { useEffect, useState, useRef } from 'react';
+import LoadingScreen from '../components/LoadingScreen';
 
 export default function Chat() {
-    const chatboxEl = useRef();
+    const [loading, setLoading] = useState(true)
     const inboxEl = useRef();
     const [talkLoaded, markTalkLoaded] = useState(false);
-    Talk.ready.then(() => markTalkLoaded(true));
+    Talk.ready.then(() => markTalkLoaded(true))
 
     useEffect(() => {
+        // setLoading(false)
         if (talkLoaded) {
             // Safe to use the SDK here
-
-
             const currentUser = new Talk.User({
                 id: '1',
                 name: 'Galaxy Pet Shop',
@@ -22,7 +22,7 @@ export default function Chat() {
             });
 
             const otherUser = new Talk.User(
-                    {
+                {
                     id: "2",
                     name: "Alice",
                     email: "alice@example.com",
@@ -48,16 +48,25 @@ export default function Chat() {
 
             const inbox = session.createInbox();
             inbox.mount(inboxEl.current);
-
             return () => session.destroy();
         }
+
     }, [talkLoaded]);
+
+    const loadingScreen = () => {
+        return <LoadingScreen />;
+    }
+
     return (
-        <div className=' w-full h-full flex justify-center'>
-            <div className=' w-2/3 h-full flex bg-[#eafdfc] p-4 rounded-md shadow-md'>
-                <div ref={inboxEl} className=" w-full" />
-                {/* <div ref={chatboxEl} className=" w-full" /> */}
+        <>
+            <div className=' w-full h-full flex justify-center'>
+                {/* {loading ? loadingScreen() : ""} */}
+                <div className=' w-2/3 h-full flex bg-[#eafdfc] p-4 rounded-md shadow-md'>
+                    <div ref={inboxEl} className=" w-full" />
+                    {/* <div ref={chatboxEl} className=" w-full" /> */}
+
+                </div>
             </div>
-        </div>
+        </>
     )
 }
