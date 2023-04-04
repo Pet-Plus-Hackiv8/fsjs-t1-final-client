@@ -2,12 +2,23 @@ import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { useQuery } from "@apollo/client";
+import { GET_SERVICE } from "../queries/service";
 
 const xScreen = Dimensions.get("window").width;
 const yScreen = Dimensions.get("window").height;
 
 export default function DetailClinic() {
   const navigation = useNavigation();
+
+  const { loading , error, data : service} = useQuery(GET_SERVICE
+    , {
+    variables: {
+      petshopId: 1
+    }
+  })
+
+  console.log(loading, error, service, "????????");
 
   return (
     <View style={{ height: yScreen }}>
@@ -36,6 +47,10 @@ export default function DetailClinic() {
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
               type specimen book. It has survived not only five centuries
             </Text>
+            <Text style={{ color: "#4B8CA1" }}>Available Service:  </Text>
+            {service?.fetchService?.map(el=>{
+                return <Text key={el.id} tyle={{ color: "#4B8CA1" }}>{el.name} </Text>
+             })}
           </View>
         </View>
       </ScrollView>
