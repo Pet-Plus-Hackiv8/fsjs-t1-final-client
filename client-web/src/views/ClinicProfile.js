@@ -1,10 +1,12 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react"
 import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng } from "react-places-autocomplete";
 import LoadingScreen from "../components/LoadingScreen";
 import ServiceTable from "../components/Tables/ServiceTable";
 import { GET_PETSHOP } from "../queries/petshop";
-import { GET_SERVICES } from "../queries/services";
+import { GET_SERVICES, POST_SERVICE } from "../queries/services";
+import FormData from "form-data"
+
 
 export default function EditClinic() {
     const [formData, setFormData] = useState({
@@ -12,7 +14,7 @@ export default function EditClinic() {
         logo: "",
         phoneNumber: localStorage.getItem("petshopNumber"),
         address: localStorage.getItem("petshopAddress"),
-        latlng: { 
+        latlng: {
             lat: localStorage.getItem("petshopLat"),
             lng: localStorage.getItem("petshopLon")
         },
@@ -24,22 +26,44 @@ export default function EditClinic() {
         minPrice: "",
         maxPrice: "",
         serviceLogo: "",
-        petshopId: Number(localStorage.getItem("petshopId"))
+        petshopId: Number(localStorage.getItem("petshopId")),
     })
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData)
         // document.getElementById('note_modal').checked = false;
-
     }
 
-    const submitService = (e) => {
-        e.preventDefault();
-        console.log(formService)
-        // document.getElementById('note_modal').checked = false;
+    const [postService, resService] = useMutation(POST_SERVICE)
 
+    const submitService = async (e) => {
+        e.preventDefault();
+        // console.log(formService)
+        setFormService({
+            ...formService,
+            minPrice: Number(formService.minPrice),
+            maxPrice: Number(formService.maxPrice),
+            petshopId: Number(localStorage.getItem("petshopId")),
+        })
+        console.log(formService)
+        await postService({
+            variables: formService
+        })
+        // document.getElementById('note_modal').checked = false;
+    }
+
+    const fileData = new FormData()
+    const handleFile = async ({ files }) => {
+        const [file] = files
+        // console.log(file, "<<<<<<<<<<")
+        fileData.append('file', file);
+        // console.log(fileData.get('file'))
+        setFormService({
+            ...formService,
+            serviceLogo: await fileData.get('file')
+        })
     }
 
     const handleChange = ({ name, value }) => {
@@ -218,7 +242,7 @@ export default function EditClinic() {
                                 </div>
                                 <div className=" flex flex-col">
                                     <label> Logo : </label>
-                                    <input type="file" className=" my-2 file-input file-input-bordered file-input-secondary w-full " />
+                                    <input name="imageUrl" onChange={({ target }) => handleFile(target)} type="file" className="file-input file-input-bordered file-input-secondary w-full" />
                                 </div>
                                 <div className=" flex justify-end gap-4 mt-4">
                                     <label htmlFor="service_modal" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">

@@ -11,4 +11,17 @@ query FetchService($petshopId: ID!) {
     id
   }
 }
-` 
+`
+
+export const POST_SERVICE = gql`
+mutation AddService($serviceLogo: Upload, $name: String, $minPrice: Int, $maxPrice: Int, $petshopId: ID) {
+  addService(serviceLogo: $serviceLogo, name: $name, minPrice: $minPrice, maxPrice: $maxPrice, PetshopId: $petshopId) {
+    serviceLogo
+    name
+    minPrice
+    maxPrice
+    id
+    PetshopId
+  }
+}
+`

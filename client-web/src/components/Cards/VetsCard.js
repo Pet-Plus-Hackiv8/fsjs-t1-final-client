@@ -85,7 +85,7 @@ export default function VetsCard({ doctor }) {
                             <img className="" src={doctor.imgUrl} alt="Profile picture" />
                         </div>
                     </div>
-                    <NavLink to="/veterinarians/1" className=" hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 duration-200 active:text-[#ff9787] select-none  w-fit">
+                    <NavLink to={`/veterinarians/${doctor.id}`} className=" hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 duration-200 active:text-[#ff9787] select-none  w-fit">
                         {doctor.name}
                     </NavLink>
                 </div>
