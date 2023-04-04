@@ -14,6 +14,13 @@ import TesChat from "./screens/TesChat";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import DetailClinic from "./screens/DetailClinic";
+import DoctorList from "./screens/DoctorList";
+import AddPetForm from "./screens/AddPetForm";
+import PetSchedule from "./screens/PetSchedule";
+import PetMedicalRecord from "./screens/PetMedicalRecord";
+import DetailMedicalRecord from "./screens/DetailMedicalRecord";
+import { ApolloProvider } from "@apollo/client";
+import client from "./config/apollo";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -91,19 +98,26 @@ function MainPage() {
 export default function App() {
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            {/* <Stack.Screen name="opening" component={OpeningPage} options={{ headerShown: false }} /> */}
-            <Stack.Screen name="login" component={Login} options={{ headerShown: false }} />
-            <Stack.Screen name="register" component={Register} options={{ headerShown: false }} />
-            <Stack.Screen name="mainPages" component={MainPage} options={{ headerShown: false }} />
-            <Stack.Screen name="detailClinic" component={DetailClinic} options={{ headerShown: false }} />
-            <Stack.Screen name="Chat" component={TesChat} options={{ headerShown: false }} />
-            <Stack.Screen name="petsTabDetail" component={DetailPet} options={{ headerShown: false }} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaView>
+      <ApolloProvider client={client}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              {/* <Stack.Screen name="opening" component={OpeningPage} options={{ headerShown: false }} /> */}
+              <Stack.Screen name="login" component={Login} options={{ headerShown: false }} />
+              <Stack.Screen name="register" component={Register} options={{ headerShown: false }} />
+              <Stack.Screen name="mainPages" component={MainPage} options={{ headerShown: false }} />
+              <Stack.Screen name="detailClinic" component={DetailClinic} options={{ headerShown: false }} />
+              <Stack.Screen name="Chat" component={TesChat} options={{ headerShown: false }} />
+              <Stack.Screen name="petsTabDetail" component={DetailPet} options={{ headerShown: false }} />
+              <Stack.Screen name="doctorList" component={DoctorList} options={{ title: "Our Doctor & Schedule" }} />
+              <Stack.Screen name="addPet" component={AddPetForm} options={{ headerShown: false }} />
+              <Stack.Screen name="petSchedules" component={PetSchedule} options={{ title: "My Schedule" }} />
+              <Stack.Screen name="petMedicalRecords" component={PetMedicalRecord} options={{ title: "Medical Record" }} />
+              <Stack.Screen name="detailMedicalRecords" component={DetailMedicalRecord} options={{ title: "Details" }} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SafeAreaView>
+      </ApolloProvider>
     </View>
   );
 }

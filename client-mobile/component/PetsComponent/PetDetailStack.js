@@ -52,13 +52,13 @@ export default function PetDetailStack() {
           </View>
           <View style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: 20, marginBottom: 100, height: 220 }}>
             <View>
-              <TouchableOpacity style={styles.botBoxSchedule}>
+              <TouchableOpacity style={styles.botBoxSchedule} onPress={() => navigation.navigate("petSchedules")}>
                 <Image style={{ width: 70, height: 70 }} source={{ uri: "https://cdn-icons-png.flaticon.com/512/3652/3652191.png" }} />
                 <Text style={{ fontSize: 15, fontWeight: "bold" }}>Schedule</Text>
               </TouchableOpacity>
             </View>
             <View>
-              <TouchableOpacity style={styles.botBoxMed}>
+              <TouchableOpacity style={styles.botBoxMed} onPress={() => navigation.navigate("petMedicalRecords")}>
                 <Image style={{ width: 70, height: 70 }} source={{ uri: "https://cdn-icons-png.flaticon.com/512/2376/2376123.png" }} />
                 <Text style={{ fontSize: 15, fontWeight: "bold" }}>Medical Record</Text>
               </TouchableOpacity>
