@@ -21,6 +21,7 @@ import PetMedicalRecord from "./screens/PetMedicalRecord";
 import DetailMedicalRecord from "./screens/DetailMedicalRecord";
 import { ApolloProvider } from "@apollo/client";
 import client from "./config/apollo";
+import HohDemoDetail from "./screens/HohDemoDetail";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -107,6 +108,7 @@ export default function App() {
               <Stack.Screen name="register" component={Register} options={{ headerShown: false }} />
               <Stack.Screen name="mainPages" component={MainPage} options={{ headerShown: false }} />
               <Stack.Screen name="detailClinic" component={DetailClinic} options={{ headerShown: false }} />
+              <Stack.Screen name="hohDemo" component={HohDemoDetail} options={{ headerShown: false }} />
               <Stack.Screen name="Chat" component={TesChat} options={{ headerShown: false }} />
               <Stack.Screen name="petsTabDetail" component={DetailPet} options={{ headerShown: false }} />
               <Stack.Screen name="doctorList" component={DoctorList} options={{ title: "Our Doctor & Schedule" }} />

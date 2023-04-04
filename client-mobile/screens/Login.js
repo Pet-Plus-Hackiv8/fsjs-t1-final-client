@@ -1,13 +1,27 @@
+import { useMutation, useQuery } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity } from "react-native";
+import { LOGIN_USER } from "../queries/users";
 
 export default function Login() {
   const navigation = useNavigation();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // console.log(password, email, "<><><><><>< data");
+
+  let [loginUser, { data, loading, error, reset }] = useMutation(LOGIN_USER);
+
+  // const { loading, error, data } = useQuery(LOGIN_USER, {
+  //   variables: {
+  //     email,
+  //     password,
+  //   },
+  // });
+
+  const handleLogin = () => {};
 
   return (
     <View style={styles.container}>
