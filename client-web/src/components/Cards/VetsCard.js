@@ -1,16 +1,22 @@
+import { useMutation } from "@apollo/client";
 import FormData from "form-data"
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
+import Swal from "sweetalert2";
+import client from "../../config/apollo";
+import { EDIT_DOCTOR } from "../../queries/doctors";
+import LoadingScreen from "../LoadingScreen";
+
 
 export default function VetsCard({ doctor }) {
-    console.log(doctor)
+    // console.log(doctor)
     const [formData, setFormData] = useState({
-        name: "",
+        name: doctor.name,
         imageUrl: "",
-        gender: "",
-        education: "",
-        petshopId: "",
-        doctorId: ""
+        gender: doctor.gender,
+        education: doctor.gender,
+        petshopId: Number(localStorage.getItem("petshopId")),
+        doctorId: doctor.id
     })
     const handleChange = ({ name, value }) => {
         setFormData({
@@ -30,12 +36,45 @@ export default function VetsCard({ doctor }) {
             imageUrl: await fileData.get('file')
         })
     }
-    const submitForm = (e) => {
+
+    const [editDoctor, { loading, error, data, reset }] = useMutation(EDIT_DOCTOR);
+
+    const submitForm = async (e) => {
         e.preventDefault();
         console.log(formData)
         // document.getElementById('note_modal').checked = false;
-
+        await editDoctor({
+            variables: formData
+        })
+        await client.refetchQueries({
+            include: "active"
+        })
     }
+
+    if (loading) {
+        return <LoadingScreen />
+    }
+    if (data) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: "Login success",
+            showConfirmButton: false,
+            timer: 1000
+        })
+    }
+
+    if (error) {
+        console.log({ error }, "<<<<<<<<<")
+        Swal.fire({
+            icon: 'error',
+            text: error.message,
+        })
+            .finally(() => {
+                reset()
+            })
+    }
+
 
     return (
         <div className=" shadow-md h-28 my-4 rounded-xl p-2 w-full flex items-center bg-[#eafdfc]">
@@ -59,13 +98,13 @@ export default function VetsCard({ doctor }) {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                 </svg>
                 <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><label htmlFor="edit_doctor_1">Edit</label></li>
+                    <li><label htmlFor={`edit_doctor_${doctor.id}`}>Edit</label></li>
                     <li><a>Delete</a></li>
                 </ul>
             </div>
             {/* edit doctor modal */}
             <div>
-                <input type="checkbox" id="edit_doctor_1" className="modal-toggle" />
+                <input type="checkbox" id={`edit_doctor_${doctor.id}`} className="modal-toggle" />
                 <div className="modal">
                     <div className="modal-box ml-72 p-4">
                         <form onSubmit={submitForm}>
@@ -97,7 +136,7 @@ export default function VetsCard({ doctor }) {
                                 </div>
                             </div>
                             <div className=" flex justify-end gap-4 mt-4">
-                                <label htmlFor="edit_doctor_1" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">
+                                <label htmlFor={`edit_doctor_${doctor.id}`} className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">
                                     <span className=" select-none">
                                         Cancel
                                     </span>

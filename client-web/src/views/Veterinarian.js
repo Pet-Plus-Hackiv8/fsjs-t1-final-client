@@ -1,14 +1,15 @@
 import { useState } from "react";
 import VetsTable from "../components/Tables/VetsTable";
 import FormData from "form-data"
-import { useQuery } from "@apollo/client";
-import { GET_DOCTORS } from "../queries/doctors";
+import { useMutation, useQuery } from "@apollo/client";
+import { ADD_DOCTOR, GET_DOCTORS } from "../queries/doctors";
 import LoadingScreen from "../components/LoadingScreen";
-
+import client from "../config/apollo";
+import Swal from "sweetalert2";
 
 export default function Veterinarians() {
     const [formData, setFormData] = useState({
-        petshopId: "",
+        petshopId: Number(localStorage.getItem("petshopId")),
         education: "",
         name: "",
         gender: "",
@@ -33,25 +34,65 @@ export default function Veterinarians() {
             imgUrl: await fileData.get('file')
         })
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData)
-        // document.getElementById('note_modal').checked = false;
+        await addDoctor({
+            variables: formData
+        })
+        await client.refetchQueries({
+            include: "active"
+        })
     }
 
-    const { loading, error, data } = useQuery(GET_DOCTORS, {
+    const { loading, error, data, reset } = useQuery(GET_DOCTORS, {
         variables: {
             petshopId: Number(localStorage.getItem("petshopId"))
         }
     })
+    const [addDoctor, response] = useMutation(ADD_DOCTOR)
+    const loadingAdd = response.loading
+    const resetAdd = response.reset
+    const errorAdd = response.error
+    const dataAdd = response.data
 
-    if (data) {
-  
+
+    if (dataAdd) {
+        setFormData({
+            petshopId: Number(localStorage.getItem("petshopId")),
+            education: "",
+            name: "",
+            gender: "",
+            imgUrl: "",
+        })
+
     }
 
-    if (loading) {
+    if (loading || loadingAdd) {
         return <LoadingScreen />
     }
+
+    if (error) {
+        console.log({ error }, "<<<<<<<<<")
+        Swal.fire({
+            icon: 'error',
+            text: error.message,
+        })
+            .finally(() => {
+                reset()
+            })
+    } else if (errorAdd) {
+        document.getElementById(`doctor_modal`).checked = true;
+        console.log({ errorAdd }, "<<<<<<<<<")
+        Swal.fire({
+            icon: 'error',
+            text: errorAdd.message,
+        })
+            .finally(() => {
+                resetAdd()
+            })
+    }
+
 
     return (
         <>

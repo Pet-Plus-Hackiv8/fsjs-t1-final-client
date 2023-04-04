@@ -23,8 +23,13 @@ export default function Layout() {
     })
 
     if (data) {
+        // console.log(data.getShopById)
         localStorage.setItem("petshopId", data.getShopById.id)
-        console.log(data)
+        localStorage.setItem("petshopName", data.getShopById.name)
+        localStorage.setItem("petshopNumber", data.getShopById.phoneNumber)
+        localStorage.setItem("petshopAddress", data.getShopById.address)
+        localStorage.setItem("petshopLat", data.getShopById.location.coordinates[0])
+        localStorage.setItem("petshopLon", data.getShopById.location.coordinates[1])
     }
 
     if (loading) {

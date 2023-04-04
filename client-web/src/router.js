@@ -58,7 +58,7 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path: "/invoice/:id",
+                path: "/invoice/:id/:petId/:doctorId",
                 element: <CreateInvoice />
             },
             {

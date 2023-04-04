@@ -1,15 +1,19 @@
 import { useState } from "react";
 import FormData from "form-data"
-
+import { useMutation } from "@apollo/client";
+import { EDIT_POST, GET_POSTS } from "../../queries/posts";
+import { REGISTER_USER } from "../../queries/users";
+import client from "../../config/apollo";
+import LoadingScreen from "../LoadingScreen";
 
 export default function PostsCard({ post }) {
-    console.log(post)
     const [formData, setFormData] = useState({
-        title: "",
+        title: post.title,
         imageUrl: "",
-        news: "",
+        news: post.news,
         petshopId: Number(localStorage.getItem("petshopId")),
-        postId: post.id
+        postId: post.id,
+        status: post.status
     })
 
     const handleChange = ({ name, value }) => {
@@ -21,6 +25,7 @@ export default function PostsCard({ post }) {
 
     const fileData = new FormData()
     const handleFile = async ({ files }) => {
+        console.log(formData)
         const [file] = files
         // console.log(file, "<<<<<<<<<<")
         fileData.append('file', file);
@@ -31,10 +36,17 @@ export default function PostsCard({ post }) {
         })
     }
 
-    const submitForm = (e) => {
+    const submitForm = async (e) => {
         e.preventDefault();
+
         console.log(formData)
-        // document.getElementById('note_modal').checked = false;
+        await editPost({ variables: formData })
+
+        await client.refetchQueries({
+            include: "active",
+        });
+
+        document.getElementById(`edit_post_${post.id}`).checked = false;
     }
 
     const active = () => {
@@ -52,6 +64,13 @@ export default function PostsCard({ post }) {
             </span>
         )
     }
+    const [editPost, { loading, error, data }] = useMutation(EDIT_POST)
+
+
+    if (loading) {
+        return <LoadingScreen />
+    }
+
 
     return (
         <div className=" shadow-md h-24 my-4 rounded-xl p-2 w-full flex items-center bg-[#eafdfc]">
@@ -99,7 +118,7 @@ export default function PostsCard({ post }) {
                 <input type="checkbox" id={`content_${post.id}`} class="modal-toggle" />
                 <div class="modal  ml-72">
                     <div class="modal-box">
-                        <h3 class="font-bold text-lg">Post content</h3>
+                        <h3 class="font-bold text-lg">{post.title}</h3>
                         <p class="py-4">{post.news}</p>
                         <div class="modal-action">
                             <label for={`content_${post.id}`} class="btn">Done</label>

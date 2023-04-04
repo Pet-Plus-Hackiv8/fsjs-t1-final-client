@@ -3,15 +3,20 @@ import { useEffect, useState } from "react"
 import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng } from "react-places-autocomplete";
 import LoadingScreen from "../components/LoadingScreen";
 import ServiceTable from "../components/Tables/ServiceTable";
+import { GET_PETSHOP } from "../queries/petshop";
 import { GET_SERVICES } from "../queries/services";
 
 export default function EditClinic() {
     const [formData, setFormData] = useState({
-        name: "",
+        name: localStorage.getItem("petshopName"),
         logo: "",
-        phoneNumber: "",
-        address: "",
-        latlng: {}
+        phoneNumber: localStorage.getItem("petshopNumber"),
+        address: localStorage.getItem("petshopAddress"),
+        latlng: { 
+            lat: localStorage.getItem("petshopLat"),
+            lng: localStorage.getItem("petshopLon")
+        },
+        id: Number(localStorage.getItem("petshopId"))
     })
 
     const [formService, setFormService] = useState({
@@ -21,6 +26,7 @@ export default function EditClinic() {
         serviceLogo: "",
         petshopId: Number(localStorage.getItem("petshopId"))
     })
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();

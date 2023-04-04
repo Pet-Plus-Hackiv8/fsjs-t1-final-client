@@ -1,9 +1,11 @@
 import PostsTable from "../components/Tables/PostsTable";
 import { useState } from "react";
 import FormData from "form-data"
-import { useQuery } from "@apollo/client";
-import { GET_POSTS } from "../queries/posts";
+import { useMutation, useQuery } from "@apollo/client";
+import { ADD_POST, GET_POSTS } from "../queries/posts";
 import LoadingScreen from "../components/LoadingScreen";
+import client from "../config/apollo";
+import Swal from "sweetalert2";
 
 
 export default function Posts() {
@@ -11,7 +13,7 @@ export default function Posts() {
         title: "",
         imageUrl: "",
         news: "",
-        petshopId: ""
+        petshopId: Number(localStorage.getItem("petshopId"))
     })
 
     const handleChange = ({ name, value }) => {
@@ -33,23 +35,56 @@ export default function Posts() {
         })
     }
 
-    const submitForm = (e) => {
+    const submitForm = async (e) => {
         e.preventDefault();
         console.log(formData)
-        // document.getElementById('note_modal').checked = false;
+        await addPost({
+            variables: formData
+        })
+
+        await client.refetchQueries({
+            include: "active"
+        })
     }
 
-    const { loading, error, data } = useQuery(GET_POSTS, {
+    const [addPost, response] = useMutation(ADD_POST)
+    const loadingAdd = response.loading
+    const errorAdd = response.error
+    const dataAdd = response.data
+    const resetAdd = response.reset
+
+    const { loading, error, data, reset } = useQuery(GET_POSTS, {
         variables: {
             petshopId: Number(localStorage.getItem("petshopId"))
         }
     })
 
-    if (data) {
+    if (dataAdd) {
+        // document.getElementById('post_modal').checked = false;
         // console.log(data)
     }
 
-    if (loading) {
+    if (error) {
+        console.log({ error }, "<<<<<<<<<")
+        Swal.fire({
+            icon: 'error',
+            text: error.message,
+        })
+            .finally(() => {
+                reset()
+            })
+    } else if (errorAdd) {
+        console.log({ errorAdd }, "<<<<<<<<<")
+        Swal.fire({
+            icon: 'error',
+            text: errorAdd.message,
+        })
+            .finally(() => {
+                resetAdd()
+            })
+    }
+
+    if (loading || loadingAdd) {
         return <LoadingScreen />
     }
 
