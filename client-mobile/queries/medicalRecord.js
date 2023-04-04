@@ -2,29 +2,85 @@ import gql from "graphql-tag";
 
 export const GET_RECORDS = gql`
   
-query GetRecord($petId: ID!) {
-    getRecord(PetId: $petId) {
+  query GetRecord($petId: ID!) {
+  getRecord(PetId: $petId) {
+    id
+    notes
+    PetId
+    DoctorId
+    PetScheduleId
+    PetshopId
+    Actions {
       id
-      notes
-      createdAt
-      PetId
-      DoctorId
-      PetScheduleId
-      PetshopId
-      Actions {
+      document
+      totalPrice
+      MedicalRecordId
+      ServiceId
+      Service {
         id
-        document
-        totalPrice
-        MedicalRecordId
-        ServiceId
+        name
+        minPrice
+        maxPrice
+        serviceLogo
+        PetshopId
       }
-      Doctor {
+    }
+    Doctor {
+      id
+      name
+      imgUrl
+      gender
+      education
+      PetshopId
+    }
+    Petshop {
+      id
+      name
+      logo
+      address
+      location {
+        type
+        coordinates
+      }
+      phoneNumber
+      UserId
+      PhoneNumber
+    }
+    PetSchedule {
+      id
+      complete
+      details
+      PetshopId
+      DoctorScheduleId
+      PetId
+      Pet {
         id
         name
         imgUrl
         gender
-        education
+        species
+        breed
+        description
+        weight
+        UserId
+        User {
+          id
+          username
+          fullName
+          email
+          imgUrl
+          role
+          phoneNumber
+          address
+        }
+      }
+      DoctorSchedule {
+        id
+        day
+        time
+        status
         PetshopId
+        DoctorId
       }
       Petshop {
         id
@@ -39,58 +95,10 @@ query GetRecord($petId: ID!) {
         UserId
         PhoneNumber
       }
-      PetSchedule {
-        id
-        complete
-        details
-        PetshopId
-        DoctorScheduleId
-        PetId
-        Pet {
-          id
-          name
-          imgUrl
-          gender
-          species
-          breed
-          description
-          weight
-          UserId
-          User {
-            id
-            username
-            fullName
-            email
-            imgUrl
-            role
-            phoneNumber
-            address
-          }
-        }
-        DoctorSchedule {
-          id
-          day
-          time
-          status
-          PetshopId
-          DoctorId
-        }
-        Petshop {
-          id
-          name
-          logo
-          address
-          location {
-            type
-            coordinates
-          }
-          phoneNumber
-          UserId
-          PhoneNumber
-        }
-      }
     }
+    createdAt
   }
+}
 `;
 
 
