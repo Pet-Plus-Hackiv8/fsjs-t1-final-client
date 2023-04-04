@@ -6,6 +6,7 @@ import ServiceTable from "../components/Tables/ServiceTable";
 import { GET_PETSHOP } from "../queries/petshop";
 import { GET_SERVICES, POST_SERVICE } from "../queries/services";
 import FormData from "form-data"
+import client from "../config/apollo";
 
 
 export default function EditClinic() {
@@ -40,18 +41,18 @@ export default function EditClinic() {
 
     const submitService = async (e) => {
         e.preventDefault();
-        // console.log(formService)
-        setFormService({
-            ...formService,
-            minPrice: Number(formService.minPrice),
-            maxPrice: Number(formService.maxPrice),
-            petshopId: Number(localStorage.getItem("petshopId")),
-        })
-        console.log(formService)
+
         await postService({
-            variables: formService
+            variables: {
+                ...formService,
+                minPrice: Number(formService.minPrice),
+                maxPrice: Number(formService.maxPrice),
+                petshopId: Number(localStorage.getItem("petshopId")),
+            }
         })
-        // document.getElementById('note_modal').checked = false;
+        await client.refetchQueries({
+            include: "active",
+        });
     }
 
     const fileData = new FormData()
@@ -137,7 +138,10 @@ export default function EditClinic() {
             petshopId: Number(localStorage.getItem("petshopId"))
         }
     })
-    if (loading) {
+    if (resService.data) {
+        // document.getElementById('service_modal').checked = false;
+    }
+    if (loading || resService.loading) {
         return <LoadingScreen />
     }
 

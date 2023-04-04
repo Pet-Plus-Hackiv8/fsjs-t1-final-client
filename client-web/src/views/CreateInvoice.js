@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import FormData from "form-data";
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import ActionCard from "../components/Cards/ActionCard";
 import LoadingScreen from "../components/LoadingScreen";
 import { GET_DOCTOR } from "../queries/doctors";
@@ -9,8 +9,11 @@ import { CREATE_INVOICE } from "../queries/invoice";
 import { GET_PET } from "../queries/pet";
 import { CREATE_RECORD } from "../queries/record";
 import { GET_SERVICES } from "../queries/services";
+import QRCode from "react-qr-code";
+
 
 export default function CreateInvoice() {
+    const navigate = useNavigate()
     const [note, setNote] = useState()
     const [actions, setActions] = useState([])
     const [action, setAction] = useState({
@@ -79,8 +82,11 @@ export default function CreateInvoice() {
 
     const [makeRecord, resRecord] = useMutation(CREATE_RECORD)
     const createRecord = async () => {
+        console.log("masuk")
         invoice.newPost.notes = note
         invoice.newPost.Actions = actions
+        console.log(invoice)
+        navigate('/')
         await makeRecord({
             variables: invoice
         })
@@ -89,7 +95,7 @@ export default function CreateInvoice() {
     let loadingData = resRecord.data
     let loadingError = resRecord.error
 
-    console.log(loadingData)
+    // console.log(loadingData)
 
     const addAction = (e) => {
         e.preventDefault()
@@ -141,6 +147,18 @@ export default function CreateInvoice() {
     let total = actions.reduce((accumulator, el) => {
         return accumulator + Number(el.totalPrice);
     }, 0);
+
+    let renderQR = (link) => {
+        return (
+            <QRCode
+                size={256}
+                style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                value={link}
+                viewBox={`0 0 128 128`}
+            />
+        )
+    }
+
 
     const formatCurreny = (number) => {
         const options = { style: 'currency', currency: 'IDR' };
@@ -280,12 +298,14 @@ export default function CreateInvoice() {
                         <div className="modal-box ml-60 p-4">
                             <div>
                                 <h3 className="text-lg font-bold">Payment link</h3>
-                                <div className="text-lg pb-8 link link-primary">
-                                    <a href={data?.generateInvoice.invoice} target="_blank" rel="noreferrer">
+                                <div className="text-lg p-20 link link-primary">
+                                    {data ? renderQR(data.generateInvoice.invoice) : ""}
+
+                                    {/* <a href={data?.generateInvoice.invoice} target="_blank" rel="noreferrer">
                                         {
                                             data?.generateInvoice.invoice
                                         }
-                                    </a>
+                                    </a> */}
                                 </div>
                                 <div className=" flex justify-end gap-4">
                                     <label onClick={createRecord} htmlFor="payment_modal" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">

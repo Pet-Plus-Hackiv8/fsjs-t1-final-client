@@ -27,7 +27,7 @@ export default function DashboardTable({ schedules }) {
             <div className=" overflow-y-scroll h-[26.5rem]">
 
                 {
-                    schedules.map((el, id) => {
+                    schedules?.map((el, id) => {
                         if (el.complete === "ongoing") {
                             return (
                                 <DashboardCard schedule={el} no={id} />

@@ -21,19 +21,7 @@ export default function HistoryTable() {
                 </div>
             </div>
             <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
+       
         </>
     )
 }

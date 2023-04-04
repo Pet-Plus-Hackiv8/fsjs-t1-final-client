@@ -10,8 +10,7 @@ export default function ClinicProfile() {
         }
     })
 
-    
-
+    console.log(data)
     if (loading) {
         return <LoadingScreen />
     }
@@ -55,7 +54,7 @@ export default function ClinicProfile() {
                 <div className="text-3xl pb-4 font-bold outline-1 outline-black text-[#ff9787] ">
                     Appointment list
                 </div>
-                <DashboardTable schedules={data.fetchPetScheduleForPetshop} />
+                <DashboardTable schedules={data?.fetchPetScheduleForPetshop} />
             </div>
         </div>
     )
