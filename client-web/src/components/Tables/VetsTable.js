@@ -1,6 +1,6 @@
 import VetsCard from "../Cards/VetsCard";
 
-export default function VetsTable() {
+export default function VetsTable({ doctors }) {
     return (
         <>
             <div className="flex justify-around border-b-2 border-[#b0bfbf] text-lg ">
@@ -20,10 +20,14 @@ export default function VetsTable() {
 
                 </div>
             </div>
-            <VetsCard />
-            <VetsCard />
-            <VetsCard />
-            <VetsCard />
+
+            {
+                doctors?.map((doctor, i) => {
+                    return (
+                        <VetsCard doctor={doctor} key={i} />
+                    )
+                })
+            }
         </>
     )
 }

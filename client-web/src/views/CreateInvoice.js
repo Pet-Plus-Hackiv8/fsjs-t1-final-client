@@ -1,6 +1,31 @@
+import { useState } from "react";
 import ActionCard from "../components/Cards/ActionCard";
 
 export default function CreateInvoice() {
+    const [note, setNote] = useState()
+    const [actions, setActions] = useState([])
+    const [action, setAction] = useState({
+
+    })
+
+    const addactions = () => {
+
+    }
+
+    const handleAction = () => {
+
+    }
+
+
+
+    const addNote = (e) => {
+        e.preventDefault();
+        console.log(note)
+        document.getElementById('note_modal').checked = false;
+    }
+
+
+
     return (
         <>
             <div className=" p-4 w-full flex-col bg-[#eafdfc] rounded-md shadow-md h-full">
@@ -8,18 +33,18 @@ export default function CreateInvoice() {
                     <div className=" w-1/2 h-1/5 mb-8 p-4 bg-white rounded-md  shadow-md">
                         <div className="flex">
                             <div className=" w-1/3 font-bold text-lg text-[#181a2a]">
-                                Appointment id
-                            </div>
-                            <div className=" text-lg">
-                                : 1
-                            </div>
-                        </div>
-                        <div className="flex">
-                            <div className=" w-1/3 font-bold text-lg text-[#181a2a]">
                                 Owner name
                             </div>
                             <div className=" text-lg">
                                 : Zio Kandaka
+                            </div>
+                        </div>
+                        <div className="flex">
+                            <div className=" w-1/3 font-bold text-lg text-[#181a2a]">
+                                Email
+                            </div>
+                            <div className=" text-lg">
+                                : zio_kandaka@mail.com
                             </div>
                         </div>
                         <div className="flex">
@@ -111,10 +136,6 @@ export default function CreateInvoice() {
                     <div className="overflow-y-scroll h-[29.5rem]">
                         <ActionCard />
                         <ActionCard />
-                        <ActionCard />
-                        <ActionCard />
-                        <ActionCard />
-                        <ActionCard />
                     </div>
                 </div>
             </div>
@@ -124,20 +145,20 @@ export default function CreateInvoice() {
                     <input type="checkbox" id="note_modal" className="modal-toggle" />
                     <div className="modal">
                         <div className="modal-box ml-60 p-4">
-                            <form>
+                            <form onSubmit={addNote}>
                                 <h3 className="text-lg font-bold">Notes :</h3>
-                                <textarea className="textarea textarea-secondary w-full my-4 h-60" placeholder="Doctor's notes ..."></textarea>
+                                <textarea name="note" value={note} onChange={({ target }) => setNote(target.value)} className="textarea textarea-secondary w-full my-4 h-60" placeholder="Doctor's notes ..."></textarea>
                                 <div className=" flex justify-end gap-4">
                                     <label htmlFor="note_modal" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">
                                         <span className=" select-none">
                                             Cancel
                                         </span>
                                     </label>
-                                    <label className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
+                                    <button typeof="submit" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
                                         <span className=" select-none">
                                             Done
                                         </span>
-                                    </label>
+                                    </button>
                                 </div>
                             </form>
                         </div>

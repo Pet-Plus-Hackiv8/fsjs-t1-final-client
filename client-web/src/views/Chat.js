@@ -64,7 +64,6 @@ export default function Chat() {
                 <div className=' w-2/3 h-full flex bg-[#eafdfc] p-4 rounded-md shadow-md'>
                     <div ref={inboxEl} className=" w-full" />
                     {/* <div ref={chatboxEl} className=" w-full" /> */}
-
                 </div>
             </div>
         </>

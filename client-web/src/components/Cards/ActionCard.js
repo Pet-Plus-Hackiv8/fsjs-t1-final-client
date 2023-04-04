@@ -10,7 +10,7 @@ export default function ActionCard() {
                 X-Ray
             </div>
             <div className="  w-3/12 select-none">
-               Rp.400.000.00,-
+               Rp.170.000.00,-
             </div>
             <div className="  w-3/12 select-none">
                xray.png

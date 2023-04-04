@@ -1,6 +1,6 @@
 import ServiceCard from "../Cards/ServiceCard.js"
 
-export default function ServiceTable() {
+export default function ServiceTable({ services }) {
     return (
         <>
             <div className="flex border-b-2 border-[#b0bfbf] pb-2 mb-2 w-full select-none" >
@@ -24,20 +24,14 @@ export default function ServiceTable() {
             </div>
 
             <div className="flex flex-col overflow-y-scroll h-[38.6rem]">
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
+                {
+                    services.map((service, i) => {
+                        return (
+                            <ServiceCard service={service} />
+                        )
+                    })
+                }
+
             </div>
         </>
     )

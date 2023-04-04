@@ -1,6 +1,9 @@
+import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react"
 import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng } from "react-places-autocomplete";
+import LoadingScreen from "../components/LoadingScreen";
 import ServiceTable from "../components/Tables/ServiceTable";
+import { GET_SERVICES } from "../queries/services";
 
 export default function EditClinic() {
     const [formData, setFormData] = useState({
@@ -11,15 +14,37 @@ export default function EditClinic() {
         latlng: {}
     })
 
-
+    const [formService, setFormService] = useState({
+        name: "",
+        minPrice: "",
+        maxPrice: "",
+        serviceLogo: "",
+        petshopId: Number(localStorage.getItem("petshopId"))
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData)
+        // document.getElementById('note_modal').checked = false;
+
     }
+
+    const submitService = (e) => {
+        e.preventDefault();
+        console.log(formService)
+        // document.getElementById('note_modal').checked = false;
+
+    }
+
     const handleChange = ({ name, value }) => {
         setFormData({
             ...formData,
+            [name]: value
+        })
+    }
+    const serviceChange = ({ name, value }) => {
+        setFormService({
+            ...formService,
             [name]: value
         })
     }
@@ -77,9 +102,14 @@ export default function EditClinic() {
         </div>
     )
 
-    // useEffect(() => {
-    //     // console.log(formData)
-    // }, [formData])
+    const { loading, error, data } = useQuery(GET_SERVICES, {
+        variables: {
+            petshopId: Number(localStorage.getItem("petshopId"))
+        }
+    })
+    if (loading) {
+        return <LoadingScreen />
+    }
 
     return (
         <div className=" w-full h-full flex rounded-md gap-4">
@@ -103,7 +133,7 @@ export default function EditClinic() {
                             <label>
                                 Phone Number :
                             </label>
-                            <input type="text" placeholder="Type here" className="input input-bordered input-secondary w-full" />
+                            <input name="phoneNumber" value={formData.phoneNumber} onChange={({ target }) => handleChange(target)} type="text" placeholder="Type here" className="input input-bordered input-secondary w-full" />
                         </div>
 
                         <div>
@@ -152,7 +182,7 @@ export default function EditClinic() {
                         </label>
                     </div>
                 </div>
-                <ServiceTable />
+                <ServiceTable services={data.fetchService} />
             </div>
             <div>
                 {/* add service modal */}
@@ -160,24 +190,24 @@ export default function EditClinic() {
                     <input type="checkbox" id="service_modal" className="modal-toggle" />
                     <div className="modal">
                         <div className="modal-box ml-72 p-4">
-                            <form>
+                            <form onSubmit={submitService}>
                                 <h3 className="text-xl font-bold mb-4">Add Service</h3>
                                 <label>
                                     Name :
                                 </label>
-                                <input type="text" placeholder="Enter service name" className=" my-2 input input-bordered w-full input-secondary" />
+                                <input name="name" value={formService.name} onChange={({ target }) => serviceChange(target)} type="text" placeholder="Enter service name" className=" my-2 input input-bordered w-full input-secondary" />
                                 <div className=" flex  gap-2">
                                     <div>
                                         <label>
                                             Min Price :
                                         </label>
-                                        <input type="number" placeholder="Enter minimum price" className=" my-2 input input-bordered w-full input-secondary" />
+                                        <input name="minPrice" value={formService.minPrice} onChange={({ target }) => serviceChange(target)} type="number" placeholder="Enter minimum price" className=" my-2 input input-bordered w-full input-secondary" />
                                     </div>
                                     <div>
                                         <label>
                                             Max Price :
                                         </label>
-                                        <input type="number" placeholder="Enter maximum price" className=" my-2 input input-bordered w-full input-secondary" />
+                                        <input name="maxPrice" value={formService.maxPrice} onChange={({ target }) => serviceChange(target)} type="number" placeholder="Enter maximum price" className=" my-2 input input-bordered w-full input-secondary" />
                                     </div>
                                 </div>
                                 <div className=" flex flex-col">
@@ -190,11 +220,11 @@ export default function EditClinic() {
                                             Cancel
                                         </span>
                                     </label>
-                                    <label typeof="submit" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
+                                    <button typeof="submit" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
                                         <span className=" select-none">
                                             Done
                                         </span>
-                                    </label>
+                                    </button>
                                 </div>
                             </form>
                         </div>

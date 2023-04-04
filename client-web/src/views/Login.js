@@ -1,5 +1,8 @@
+import { useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom"
+import Swal from "sweetalert2";
+import { LOGIN_USER } from "../queries/users";
 
 
 export default function Login() {
@@ -8,6 +11,7 @@ export default function Login() {
         email: "",
         password: ""
     });
+    let [loginUser, { data, loading, error, reset }] = useMutation(LOGIN_USER);
 
     const handleChange = ({ name, value }) => {
         setLoginData({
@@ -16,15 +20,39 @@ export default function Login() {
         })
     };
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        localStorage.setItem("access_token", loginData.email)
+        console.log(loginData)
+        let { data } = await loginUser({ variables: loginData })
+        localStorage.setItem("access_token", data.login.access_token);
+        localStorage.setItem("UserId", data.login.UserId)
+
         navigate('/');
     };
 
-    useEffect(() => {
-        console.log(loginData)
-    }, [loginData])
+    if (data) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: "Login success",
+            showConfirmButton: false,
+            timer: 1000
+        })
+    }
+
+    if (error) {
+        console.log({ error }, "<<<<<<<<<")
+        Swal.fire({
+            icon: 'error',
+            text: error.message,
+        })
+            .finally(() => {
+                reset()
+            })
+    }
+    // useEffect(() => {
+    //     console.log(loginData)
+    // }, [loginData])
 
     return (
         <div className=" w-screen h-screen bg-[#eafdfc] flex flex-col items-center">

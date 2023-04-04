@@ -1,6 +1,21 @@
 import { useState } from "react"
 
 export default function VetDetail() {
+    const [formData, setFormData] = useState({
+        petshopId: "",
+        doctorId: "",
+        status: "",
+        time: "",
+        day: ""
+    })
+
+    const handleChange = ({ name, value }) => {
+        setFormData({
+            ...formData,
+            [name]: value
+        })
+    }
+
     const [schedule, setSchedule] = useState({
         Monday: [],
         Tuesday: [],
@@ -30,7 +45,7 @@ export default function VetDetail() {
 
     const data = [
         {
-            "id": 1,   
+            "id": 1,
             "day": "Monday",
             "time": "Session 2",
             "status": "Available",
@@ -38,7 +53,7 @@ export default function VetDetail() {
             "DoctorId": 1
         },
         {
-            "id": 2,   
+            "id": 2,
             "day": "Saturday",
             "time": "Session 4",
             "status": "Unavailable",
@@ -46,7 +61,7 @@ export default function VetDetail() {
             "DoctorId": 1
         },
         {
-            "id": 3,   
+            "id": 3,
             "day": "Wednesday",
             "time": "Session 8",
             "status": "On Leave",
@@ -54,7 +69,7 @@ export default function VetDetail() {
             "DoctorId": 1
         },
         {
-            "id": 4,   
+            "id": 4,
             "day": "Saturday",
             "time": "Session 5",
             "status": "Unavailable",

@@ -1,4 +1,10 @@
+import { useQuery } from "@apollo/client";
+import { useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { GET_PETSHOP } from "../queries/petshop";
+import LoadingScreen from "./LoadingScreen";
+
+
 
 export default function Layout() {
     const navigate = useNavigate()
@@ -7,8 +13,24 @@ export default function Layout() {
     }
     const handleLogout = () => {
         localStorage.removeItem("access_token");
+        localStorage.removeItem("UserId");
         changePage("/login")
     }
+    const { loading, error, data } = useQuery(GET_PETSHOP, {
+        variables: {
+            userId: Number(localStorage.getItem("UserId"))
+        }
+    })
+
+    if (data) {
+        localStorage.setItem("petshopId", data.getShopById.id)
+        console.log(data)
+    }
+
+    if (loading) {
+        return <LoadingScreen />
+    }
+
     return (<>
         <div className="navbar md:hidden absolute z-50 top-0 bg-[#2d3748] flex justify-between">
             <img className="h-16 ml-[4.6rem]" src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" />
@@ -37,13 +59,13 @@ export default function Layout() {
 
                         <div tabIndex="0" className="avatar w-full p-20 py-0">
                             <div className="w-full rounded-full">
-                                <img src="https://i.guim.co.uk/img/media/c5e73ed8e8325d7e79babf8f1ebbd9adc0d95409/2_5_1754_1053/master/1754.jpg?width=620&quality=45&dpr=2&s=none" />
+                                <img src={data.getShopById.logo} />
                             </div>
                         </div>
                         <li>
                             <NavLink to="/profile" className={({ isActive }) => isActive ? "font-bold bg-transparent active:bg-[#ff9787] active:text-[#272822]" : "active:bg-[#ff9787] active:text-[#272822] "} >
                                 <div className=" text-lg flex justify-center w-full">
-                                    Galaxy Pet Shop
+                                    {data.getShopById.name}
                                 </div>
                             </NavLink>
                         </li>

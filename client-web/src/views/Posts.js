@@ -1,6 +1,58 @@
 import PostsTable from "../components/Tables/PostsTable";
+import { useState } from "react";
+import FormData from "form-data"
+import { useQuery } from "@apollo/client";
+import { GET_POSTS } from "../queries/posts";
+import LoadingScreen from "../components/LoadingScreen";
+
 
 export default function Posts() {
+    const [formData, setFormData] = useState({
+        title: "",
+        imageUrl: "",
+        news: "",
+        petshopId: ""
+    })
+
+    const handleChange = ({ name, value }) => {
+        setFormData({
+            ...formData,
+            [name]: value
+        })
+    }
+
+    const fileData = new FormData()
+    const handleFile = async ({ files }) => {
+        const [file] = files
+        // console.log(file, "<<<<<<<<<<")
+        fileData.append('file', file);
+        // console.log(fileData.get('file'))
+        setFormData({
+            ...formData,
+            imageUrl: await fileData.get('file')
+        })
+    }
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        console.log(formData)
+        // document.getElementById('note_modal').checked = false;
+    }
+
+    const { loading, error, data } = useQuery(GET_POSTS, {
+        variables: {
+            petshopId: Number(localStorage.getItem("petshopId"))
+        }
+    })
+
+    if (data) {
+        // console.log(data)
+    }
+
+    if (loading) {
+        return <LoadingScreen />
+    }
+
     return (
         <>
             <div className=" flex justify-between items-center ">
@@ -18,25 +70,25 @@ export default function Posts() {
                     </span>
                 </label>
             </div>
-            <PostsTable />
+            <PostsTable posts={data.fetchPost} />
             {/* add post modal */}
             <div>
                 <input type="checkbox" id="post_modal" className="modal-toggle" />
                 <div className="modal">
                     <div className="modal-box ml-72 p-4">
-                        <form>
+                        <form onSubmit={submitForm}>
                             <h3 className="text-xl font-bold mb-4">Add Post</h3>
                             <label>
                                 Title :
                             </label>
-                            <input type="text" placeholder="Enter post title" className=" my-2 input input-secondary input-bordered w-full" />
+                            <input name="title" value={formData.title} onChange={({ target }) => handleChange(target)} type="text" placeholder="Enter post title" className=" my-2 input input-secondary input-bordered w-full" />
                             <div className=" flex flex-col ">
                                 <label> Content: </label>
-                                <textarea className="textarea my-2 textarea-secondary h-32" placeholder="Enter post content"></textarea>
+                                <textarea name="news" value={formData.news} onChange={({ target }) => handleChange(target)} className="textarea my-2 textarea-secondary h-32" placeholder="Enter post content"></textarea>
                             </div>
                             <div className=" flex flex-col">
                                 <label> Image URL : </label>
-                                <input type="text" placeholder="Enter Image URL" className=" my-2 input input-secondary input-bordered w-full" />
+                                <input name="imageUrl" onChange={({ target }) => handleFile(target)} type="file" className="file-input file-input-bordered file-input-secondary w-full" />
                             </div>
                             <div className=" flex justify-end gap-4 mt-4">
                                 <label htmlFor="post_modal" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-rose-300 hover:bg-rose-400 active:bg-rose-300 active:scale-95 duration-200 ">
@@ -44,11 +96,11 @@ export default function Posts() {
                                         Cancel
                                     </span>
                                 </label>
-                                <label typeof="submit" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
+                                <button typeof="submit" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
                                     <span className=" select-none">
-                                        Done
+                                        Add
                                     </span>
-                                </label>
+                                </button>
                             </div>
                         </form>
                     </div>

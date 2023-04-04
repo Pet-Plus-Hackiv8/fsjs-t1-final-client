@@ -9,6 +9,8 @@ export default function EditClinic() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData)
+        // document.getElementById('note_modal').checked = false;
+
     }
     const handleChange = ({ name, value }) => {
         setFormData({
