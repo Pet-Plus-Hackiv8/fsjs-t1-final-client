@@ -10,8 +10,8 @@ export default function Profile() {
     <ScrollView style={{ paddingBottom: 40, backgroundColor: "white" }}>
       <ScrollView style={styles.container}>
         <View style={styles.marginContainer}>
-          <View style={{ alignItems: "center", flex: 1 }}>
-            <Image style={{ height: yScreen / 2.8, width: xScreen - 30, borderRadius: 30 }} source={{ uri: "https://i.pinimg.com/564x/cd/80/4b/cd804b46abaad65369e85b527307af4d.jpg" }} />
+          <View style={{ alignItems: "center", flex: 1, marginTop: 15 }}>
+            <Image style={{ height: yScreen / 2.8, width: xScreen - 40, borderRadius: 30 }} source={{ uri: "https://i.pinimg.com/564x/cd/80/4b/cd804b46abaad65369e85b527307af4d.jpg" }} />
           </View>
           <View>
             <Text style={{ fontSize: 30, fontWeight: "500" }}>Zio Kandakha</Text>

@@ -10,6 +10,10 @@ import Profile from "./screens/Profile";
 import Pets from "./screens/Pets";
 import Clinic from "./screens/Clinic";
 import DetailPet from "./screens/DetailPet";
+import TesChat from "./screens/TesChat";
+import Login from "./screens/Login";
+import Register from "./screens/Register";
+import DetailClinic from "./screens/DetailClinic";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,12 +34,18 @@ function PetStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="petsTab" component={Pets} options={{ headerShown: false }} />
-      <Stack.Screen name="petsTabDetail" component={DetailPet} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+}
+function HomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Homes" component={Home} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
 
-export default function App() {
+function MainPage() {
   const navOption = ({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => {
       size = 30;
@@ -69,15 +79,29 @@ export default function App() {
   });
 
   return (
+    <Tab.Navigator screenOptions={navOption}>
+      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Clinic" component={Clinic} />
+      <Tab.Screen name="Pets" component={PetStack} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
+  return (
     <View style={styles.container}>
       <SafeAreaView style={{ flex: 1 }}>
         <NavigationContainer>
-          <Tab.Navigator screenOptions={navOption}>
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Clinic" component={Clinic} />
-            <Tab.Screen name="Pets" component={PetStack} />
-            <Tab.Screen name="Profile" component={Profile} />
-          </Tab.Navigator>
+          <Stack.Navigator>
+            {/* <Stack.Screen name="opening" component={OpeningPage} options={{ headerShown: false }} /> */}
+            <Stack.Screen name="login" component={Login} options={{ headerShown: false }} />
+            <Stack.Screen name="register" component={Register} options={{ headerShown: false }} />
+            <Stack.Screen name="mainPages" component={MainPage} options={{ headerShown: false }} />
+            <Stack.Screen name="detailClinic" component={DetailClinic} options={{ headerShown: false }} />
+            <Stack.Screen name="Chat" component={TesChat} options={{ headerShown: false }} />
+            <Stack.Screen name="petsTabDetail" component={DetailPet} options={{ headerShown: false }} />
+          </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
     </View>
