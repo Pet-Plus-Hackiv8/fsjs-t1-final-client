@@ -22,10 +22,7 @@ query FetchOneDoctor($petshopId: ID!, $doctorId: ID!) {
     education
   }
 }
-
 `
-
-
 
 export const ADD_DOCTOR = gql`
 mutation AddDoctor($name: String, $imgUrl: Upload, $gender: String, $education: String, $petshopId: ID) {
@@ -45,3 +42,4 @@ mutation EditDoctor($name: String, $imgUrl: Upload, $gender: String, $education:
     message
   }
 }`
+

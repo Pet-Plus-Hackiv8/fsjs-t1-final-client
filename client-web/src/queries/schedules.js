@@ -24,3 +24,13 @@ query FetchPetScheduleForPetshop($petshopId: ID!) {
     }
   }
 }`
+
+export const GET_DOCTOR_SCHEDULE = gql`
+query FetchOneDoctor($doctorId: ID!, $petshopId: ID!) {
+  getDocSched(DoctorId: $doctorId, PetshopId: $petshopId) {
+    time
+    status
+    day
+    id
+  }
+}`

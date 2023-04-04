@@ -1,12 +1,25 @@
+import { useQuery } from "@apollo/client"
 import { useState } from "react"
+import { useParams } from "react-router-dom"
+import LoadingScreen from "../components/LoadingScreen"
+import { GET_DOCTOR } from "../queries/doctors"
+import { GET_DOCTOR_SCHEDULE } from "../queries/schedules"
 
 export default function VetDetail() {
+    let { id } = useParams()
     const [formData, setFormData] = useState({
         petshopId: "",
         doctorId: "",
         status: "",
         time: "",
         day: ""
+    })
+
+    const { loading, error, data } = useQuery(GET_DOCTOR, {
+        variables: {
+            petshopId: Number(localStorage.getItem("petshopId")),
+            doctorId: Number(id)
+        }
     })
 
     const handleChange = ({ name, value }) => {
@@ -43,7 +56,7 @@ export default function VetDetail() {
         "Saturday",
     ]
 
-    const data = [
+    const testData = [
         {
             "id": 1,
             "day": "Monday",
@@ -77,6 +90,13 @@ export default function VetDetail() {
             "DoctorId": 1
         },
     ]
+
+    const { loading: load, error: err, data: dat } = useQuery(GET_DOCTOR_SCHEDULE, {
+        variables: {
+            petshopId: Number(localStorage.getItem("petshopId")),
+            doctorId: Number(id)
+        }
+    });
 
     const scheduleFinder = (data) => {
         let temp = structuredClone(schedule)
@@ -124,12 +144,22 @@ export default function VetDetail() {
         )
     }
     useState(() => {
-        scheduleFinder(data)
+        scheduleFinder(testData)
     }, [])
-    useState(() => {
-        console.log(schedule)
-    }, [schedule])
 
+    if (loading || load) {
+        return <LoadingScreen />
+    }
+
+    if (data) {
+        // console.log(data.fetchOneDoctor)
+    }
+
+    if (dat) {
+        // console.log(dat.getDocSched)
+        // console.log(testData)
+        // scheduleFinder(dat.getDocSched)
+    }
     return (
         <div className=" w-full h-full flex">
             <div className=" w-1/4 flex  flex-col items-center">
@@ -140,18 +170,18 @@ export default function VetDetail() {
                     <div className=" bg-[#eafdfc] rounded-t-md shadow-md">
                         <div className="w-full p-8 pb-4 flex flex-col">
                             <div className="">
-                                <img className=" rounded-xl object-cover w-full h-56" src="https://images.ctfassets.net/rt5zmd3ipxai/0stMAHytHj2enLmAroKbh/5e73db26112b9e2c3257c7dbae81ec66/IMG_5395.c50e7600bcc175511c722c4dcc4ddad5.jpg" alt="Avatar Tailwind CSS Component" />
+                                <img className=" rounded-xl object-cover w-full h-56" src={data?.fetchOneDoctor.imgUrl} alt="Avatar Tailwind CSS Component" />
                             </div>
                             <div className="flex flex-col  items-center">
                                 <div className=" text-lg font-bold">
-                                    Drh. Bedul
+                                    {data?.fetchOneDoctor.name}
                                 </div>
                                 <div className=" text-secondary">
-                                    Universitas Indonesia
+                                    {data?.fetchOneDoctor.education}
                                 </div>
                             </div>
                             <div className="flex w-full justify-center">
-                                Male
+                                {data?.fetchOneDoctor.gender}
                             </div>
                         </div>
                     </div>

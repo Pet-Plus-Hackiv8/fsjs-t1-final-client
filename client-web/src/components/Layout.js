@@ -14,6 +14,15 @@ export default function Layout() {
     const handleLogout = () => {
         localStorage.removeItem("access_token");
         localStorage.removeItem("UserId");
+        localStorage.removeItem("petshopPhone");
+        localStorage.removeItem("petshopLon");
+        localStorage.removeItem("talkjs:desktop_notify");
+        localStorage.removeItem("petshopNumber");
+        localStorage.removeItem("petshopId");
+        localStorage.removeItem("petshopName");
+        localStorage.removeItem("petshopLat");
+        localStorage.removeItem("petshopAddress");
+
         changePage("/login")
     }
     const { loading, error, data } = useQuery(GET_PETSHOP, {
