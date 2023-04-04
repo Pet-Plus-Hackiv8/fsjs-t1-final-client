@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   maxScroll: {
-    marginBottom: 70,
+    marginBottom: 0,
   },
 });

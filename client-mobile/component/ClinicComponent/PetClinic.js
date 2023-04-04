@@ -1,16 +1,19 @@
+import { useNavigation } from "@react-navigation/native";
 import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
 
 export default function PetClinic() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ marginVertical: 20 }}>
       <Text style={{ fontSize: 20, fontWeight: "700", color: "#4B8CA1", marginLeft: 10 }}>Pet Clinic</Text>
       <ScrollView horizontal={true} style={styles.eventMainView} showsHorizontalScrollIndicator={false}>
         <View>
-          <View style={{ maxHeight: 200 }}>
+          <TouchableOpacity style={{ maxHeight: 200 }} onPress={() => navigation.navigate("detailClinic")}>
             <Image style={{ width: 260, height: 200, resizeMode: "cover", marginHorizontal: 5 }} source={{ uri: "https://i.pinimg.com/736x/9d/6c/53/9d6c53ea68b751ff3413ab0ac0b6b0a6.jpg" }} />
             <Text style={styles.titleClinic}>Athena Pet Clinic</Text>
             <Text style={styles.titleClinicDesc}>Jl.Metro Pondok Indah | Kebayoran baru</Text>
-          </View>
+          </TouchableOpacity>
         </View>
         <View>
           <View style={{ maxHeight: 200 }}>
