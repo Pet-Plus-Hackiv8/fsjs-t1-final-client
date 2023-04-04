@@ -1,7 +1,19 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
+import { useQuery } from "@apollo/client";
+import { GET_RECORDS } from "../queries/medicalRecord";
 
-export default function DetailMedicalRecord() {
+
+export default function DetailMedicalRecord({route}) {
+  // const {item} = route.params
+  // console.log(item, "?????????????????????????");
+
+  const { loading , error, data : medical} = useQuery(GET_RECORDS, {
+    variables: {
+      petId: 1
+    }
+  })
+
   const notesData = [
     {
       id: "1",
@@ -22,14 +34,20 @@ export default function DetailMedicalRecord() {
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.description}>{item.description}</Text>
+      <Text style={styles.title}>{item?.Petshop.name}</Text>
+      <Text style={styles.title}>{item?.createdAt}</Text>
+      <Text style={[styles.description, {fontStyle:"italic"}]}>Created By: {item?.Doctor.name} </Text>
+      <Text style={[styles.description, {fontWeight:"bold"}]}>Details :</Text>
+      <Text style={styles.description}>{item?.PetSchedule.details} </Text>
+      <Text style={[styles.description, {fontWeight:"bold"}]}>Diagnosis and treatment :</Text>
+      <Text style={styles.description}>{item?.notes} </Text>
+      
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <FlatList data={notesData} renderItem={renderItem} keyExtractor={(item) => item.id} />
+      <FlatList data={medical.getRecord} renderItem={renderItem} keyExtractor={(item) => item.id} />
     </View>
   );
 }
