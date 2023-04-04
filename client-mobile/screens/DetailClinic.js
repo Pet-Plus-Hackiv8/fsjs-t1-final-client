@@ -18,7 +18,7 @@ export default function DetailClinic() {
         <Image style={{ height: yScreen / 1.6, width: xScreen }} source={{ uri: "https://i.pinimg.com/564x/ed/62/74/ed6274151e48269b4ffde0669fefac20.jpg" }} />
       </View>
       {/* <View style={{ borderTopEndRadius: 50, borderTopStartRadius: 50, position: "absolute", backgroundColor: "#e3e7fa", width: xScreen, height: 40, bottom: 15 }}></View> */}
-      <View style={{ height: 110, gap: 20, backgroundColor: "#e3e7fa", borderRadius: 20, width: xScreen / 1.15, alignSelf: "center", position: "absolute", zIndex: 30, top: 365 }}>
+      <View style={{ height: 110, gap: 20, backgroundColor: "#ffe9e7", borderRadius: 20, width: xScreen / 1.15, alignSelf: "center", position: "absolute", zIndex: 30, top: 365, elevation: 10 }}>
         <View style={{ marginTop: 20 }}>
           <Text style={{ width: xScreen, fontSize: 20, fontWeight: "bold", left: 20, marginTop: 15, color: "#4B8CA1" }}>Athena Pet Clinic</Text>
           <Text style={{ width: xScreen, fontSize: 15, fontWeight: "400", left: 20, lineHeight: 20, color: "#4B8CA1" }}>Jl.Metro Pondok Indah</Text>
@@ -43,9 +43,9 @@ export default function DetailClinic() {
         <View style={{ alignSelf: "center", backgroundColor: "white", elevation: 5, borderRadius: 200, width: 50, alignItems: "center", justifyContent: "center", height: 45 }}>
           <Ionicons name={"heart-outline"} size={45} style={{ elevation: 5, shadowColor: "#000", alignItems: "center", justifyContent: "center" }} />
         </View>
-        <View style={{ marginRight: 30, backgroundColor: "#2e5767", width: 200, alignSelf: "flex-end", padding: 10, borderRadius: 20 }}>
+        <TouchableOpacity onPress={() => navigation.navigate("doctorList")} style={{ marginRight: 30, backgroundColor: "#2e5767", width: 200, alignSelf: "flex-end", padding: 10, borderRadius: 20 }}>
           <Text style={{ textAlign: "center", color: "white", fontSize: 20, fontWeight: "500" }}>Book</Text>
-        </View>
+        </TouchableOpacity>
       </View>
       <StatusBar hidden />
     </View>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     // backgroundColor: "red",
-    height: 240,
+    height: 200,
     gap: 23,
   },
   titleClinic: {

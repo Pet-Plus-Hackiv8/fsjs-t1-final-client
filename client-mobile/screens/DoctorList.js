@@ -3,32 +3,20 @@ import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
 import MarqueeText from "react-native-text-ticker";
 import GoodDeals from "../component/ClinicComponent/GoodDeals";
-import PetClinic from "../component/ClinicComponent/PetClinic";
+import List from "../component/DoctorComponent/List";
 
 const yScreen = Dimensions.get("window").height;
 const xScreen = Dimensions.get("window").width;
 
-export default function Clinic() {
+export default function DoctorList() {
   return (
     <View style={styles.container}>
-      <View>
-        <View style={styles.topClinic}>
-          <View style={styles.topSearch}>
-            <Ionicons name="search" size={24} color="#BDBDBD" />
-            <TextInput style={styles.searchBox} placeholder="Search" />
-          </View>
-        </View>
-      </View>
-
-      {/* Top Home End ================================================================================================================= */}
-
       <ScrollView style={styles.maxScroll}>
-        <PetClinic />
+        <List />
         {/* <View>
           <Image style={{ width: 150, height: 90, alignSelf: "center", borderRadius: 500, marginBottom: 10 }} source={{ uri: "https://i.ibb.co/3TCj30Y/ezgif-com-gif-maker-6.gif" }} />
         </View> */}
       </ScrollView>
-      <GoodDeals />
 
       <StatusBar style="auto" />
     </View>
