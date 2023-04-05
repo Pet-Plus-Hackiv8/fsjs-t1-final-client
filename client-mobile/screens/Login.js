@@ -42,7 +42,7 @@ export default function Login() {
       setAccessToken(data.login.access_token);
       AsyncStorage.setItem("accessToken", data.login.access_token);
       navigation.navigate("mainPages");
-    });
+    })
   }
 
   return (
