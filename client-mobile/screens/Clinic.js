@@ -16,11 +16,8 @@ export default function Clinic() {
     loading,
     error,
     data: clinicData,
-  } = useQuery(GET_ALL_PETSHOP, {
-    variables: {
-      userId: 1,
-    },
-  });
+  } = useQuery(GET_ALL_PETSHOP);
+  console.log(clinicData, ">>>>>>>");
 
   if (loading) {
     return <OpeningPage />;

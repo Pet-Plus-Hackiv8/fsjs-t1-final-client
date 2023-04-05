@@ -1,12 +1,18 @@
 import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
+import { useQuery } from "@apollo/client";
+
 
 const xScreen = Dimensions.get("window").width;
 const yScreen = Dimensions.get("window").height;
 
 export default function PetDetailStack() {
   const navigation = useNavigation();
+
+ 
+
+
 
   return (
     <View style={{ height: yScreen }}>
