@@ -1,6 +1,6 @@
 import PostsCard from "../Cards/PostsCard";
 
-export default function PostsTable() {
+export default function PostsTable({ posts }) {
     return (
         <>
             <div className="flex justify-around border-b-2 border-[#b0bfbf] text-lg ">
@@ -8,7 +8,7 @@ export default function PostsTable() {
                     Title
                 </div>
                 <div className=" w-2/12">
-                    Created At
+                    Post Image
                 </div>
                 <div className=" w-2/12">
                     Status
@@ -20,9 +20,13 @@ export default function PostsTable() {
 
                 </div>
             </div>
-            <PostsCard />
-            <PostsCard />
-            <PostsCard />
+            {
+                posts?.map((el, i) => {
+                    return (
+                        <PostsCard key={i} post={el} />
+                    )
+                })
+            }
         </>
     )
 }

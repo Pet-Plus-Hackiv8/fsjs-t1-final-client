@@ -2,7 +2,7 @@ import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity
 
 export default function GoodDeals() {
   return (
-    <>
+    <View style={{ bottom: 8 }}>
       <Text style={{ fontSize: 20, fontWeight: "700", color: "#4B8CA1", marginLeft: 10 }}>Good Deals</Text>
       <ScrollView horizontal={true} style={styles.container} showsHorizontalScrollIndicator={false}>
         <View style={styles.gaps}>
@@ -26,7 +26,7 @@ export default function GoodDeals() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </>
+    </View>
   );
 }
 
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     gap: 23,
   },
   imageSize: {
-    width: 250,
-    height: 200,
+    width: 230,
+    height: 100,
     borderRadius: 10,
     resizeMode: "cover",
   },

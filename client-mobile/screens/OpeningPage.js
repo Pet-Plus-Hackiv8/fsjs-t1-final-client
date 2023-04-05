@@ -3,17 +3,9 @@ import { Animated, StyleSheet, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
-const OpeningPage = () => {
+export default function OpeningPage() {
   const navigation = useNavigation();
   const fadeAnim = new Animated.Value(0);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate("mainPages");
-    }, 2500);
-
-    return () => clearTimeout(timer);
-  }, [navigation]);
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -32,7 +24,7 @@ const OpeningPage = () => {
       <StatusBar style="auto" />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -47,5 +39,3 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 });
-
-export default OpeningPage;

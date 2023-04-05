@@ -4,11 +4,27 @@ import { Ionicons } from "@expo/vector-icons";
 import MarqueeText from "react-native-text-ticker";
 import GoodDeals from "../component/ClinicComponent/GoodDeals";
 import PetClinic from "../component/ClinicComponent/PetClinic";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_PETSHOP, GET_PETSHOP } from "../queries/petshop";
+import OpeningPage from "./OpeningPage";
 
 const yScreen = Dimensions.get("window").height;
 const xScreen = Dimensions.get("window").width;
 
 export default function Clinic() {
+  const {
+    loading,
+    error,
+    data: clinicData,
+  } = useQuery(GET_ALL_PETSHOP);
+  console.log(clinicData, ">>>>>>>");
+
+  if (loading) {
+    return <OpeningPage />;
+  }
+
+  console.log(clinicData, "wewewew");
+
   return (
     <View style={styles.container}>
       <View>
@@ -23,12 +39,12 @@ export default function Clinic() {
       {/* Top Home End ================================================================================================================= */}
 
       <ScrollView style={styles.maxScroll}>
-        <PetClinic />
+        <PetClinic clinicData={clinicData} />
         {/* <View>
           <Image style={{ width: 150, height: 90, alignSelf: "center", borderRadius: 500, marginBottom: 10 }} source={{ uri: "https://i.ibb.co/3TCj30Y/ezgif-com-gif-maker-6.gif" }} />
         </View> */}
-        <GoodDeals />
       </ScrollView>
+      <GoodDeals />
 
       <StatusBar style="auto" />
     </View>
@@ -62,6 +78,9 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  maxScroll: {
+    marginBottom: 10,
   },
   //  Main Home Content Style ============================================================================================================
 });

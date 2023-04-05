@@ -6,10 +6,20 @@ import Event from "../component/HomeComponent/Event";
 import GoodDeals from "../component/HomeComponent/GoodDeals";
 import { useNavigation } from "@react-navigation/native";
 
+import { GET_POSTS } from "../queries/posts";
+import { useQuery } from "@apollo/client";
+
 const yScreen = Dimensions.get("window").height;
 
 export default function Home() {
+  const { loading, error, data } = useQuery(GET_POSTS, {
+    variables: {
+      petshopId: 1,
+    },
+  });
+
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View>
@@ -18,14 +28,10 @@ export default function Home() {
             <Image style={styles.profileImage} source={{ uri: "https://media.giphy.com/media/ZE6Aa9S2ViLVhqNqL2/giphy.gif" }} />
             <Text style={styles.profileName}>Zio Kandakha </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.profile} onPress={() => navigation.navigate("login")}>
-            {/* <Image style={styles.profileImage} source={{ uri: "https://media.giphy.com/media/ZE6Aa9S2ViLVhqNqL2/giphy.gif" }} /> */}
-            <Text style={styles.profileName}>Login </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.profileLocation} onPress={() => navigation.navigate("Chat")}>
+          {/* <TouchableOpacity style={styles.profileLocation} onPress={() => navigation.navigate("Chat")}>
             <Text style={styles.profileName}></Text>
             <Ionicons name={"chatbox-ellipses-outline"} size={25} style={{ elevation: 5, shadowColor: "#000", marginRight: 10 }} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
 

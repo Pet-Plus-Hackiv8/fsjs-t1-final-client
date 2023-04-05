@@ -1,38 +1,85 @@
+import { useQuery } from "@apollo/client";
+import { useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { GET_PETSHOP } from "../queries/petshop";
+import LoadingScreen from "./LoadingScreen";
+
+
 
 export default function Layout() {
     const navigate = useNavigate()
     const changePage = (page) => {
         navigate(page)
     }
-    return (<>
+    const handleLogout = () => {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("UserId");
+        localStorage.removeItem("petshopPhone");
+        localStorage.removeItem("petshopLon");
+        localStorage.removeItem("talkjs:desktop_notify");
+        localStorage.removeItem("petshopNumber");
+        localStorage.removeItem("petshopId");
+        localStorage.removeItem("petshopName");
+        localStorage.removeItem("petshopLat");
+        localStorage.removeItem("petshopAddress");
 
-        <div className="drawer drawer-mobile">
+        changePage("/login")
+    }
+    const { loading, error, data } = useQuery(GET_PETSHOP, {
+        variables: {
+            userId: Number(localStorage.getItem("UserId"))
+        }
+    })
+
+    if (data) {
+        // console.log(data.getShopById)
+        localStorage.setItem("petshopId", data.getShopById.id)
+        localStorage.setItem("petshopName", data.getShopById.name)
+        localStorage.setItem("petshopNumber", data.getShopById.phoneNumber)
+        localStorage.setItem("petshopAddress", data.getShopById.address)
+        localStorage.setItem("petshopLat", data.getShopById.location.coordinates[0])
+        localStorage.setItem("petshopLon", data.getShopById.location.coordinates[1])
+    }
+
+    if (loading) {
+        return <LoadingScreen />
+    }
+
+    return (<>
+        <div className="navbar md:hidden absolute z-50 top-0 bg-[#2d3748] flex justify-between">
+            <img className="h-16 ml-[4.6rem]" src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" />
+            <label htmlFor="my-drawer-2" className="btn btn-ghost drawer-button lg:hidden">
+                <svg fill="none" className=" w-8 p-0 text-white" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </label>
+        </div>
+        <div className="drawer  drawer-mobile ">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content p-8">
+            <div className="drawer-content md:p-6 p-6 pt-28 ">
                 {/* <!-- Page content here --> */}
                 <Outlet />
             </div>
-            <div className="drawer-side ">
+            <div className="drawer-side shadow-md">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 bg-[#eafdfc] text-base-content">
+                <ul className="menu p-4 w-80 bg-[#eafdfc] text-base-content ">
                     {/* <!-- Sidebar content here --> */}
                     {/* <img className=" h-28" src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" /> */}
                     <div>
                         <div className=" pl-6">
-                            <img className="h-120 " src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" />
+                            <img className="h-120  hidden md:block" src="https://i.ibb.co/GFFRCg7/Logo2-removebg.png" />
                         </div>
                         <li className=" px-12 my-6"></li>
 
-                        <div tabindex="0" class="avatar w-full p-20 py-0">
-                            <div class="w-full rounded-full">
-                                <img src="https://i.guim.co.uk/img/media/c5e73ed8e8325d7e79babf8f1ebbd9adc0d95409/2_5_1754_1053/master/1754.jpg?width=620&quality=45&dpr=2&s=none" />
+                        <div tabIndex="0" className="avatar w-full p-20 py-0">
+                            <div className="w-full rounded-full">
+                                <img src={data.getShopById.logo} />
                             </div>
                         </div>
                         <li>
                             <NavLink to="/profile" className={({ isActive }) => isActive ? "font-bold bg-transparent active:bg-[#ff9787] active:text-[#272822]" : "active:bg-[#ff9787] active:text-[#272822] "} >
                                 <div className=" text-lg flex justify-center w-full">
-                                    Galaxy Pet Shop
+                                    {data.getShopById.name}
                                 </div>
                             </NavLink>
                         </li>
@@ -43,6 +90,14 @@ export default function Layout() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                                 </svg>
                                 Dashboard
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/chat" className={({ isActive }) => isActive ? "font-bold bg-transparent active:bg-[#ff9787] active:text-[#272822]" : "active:bg-[#ff9787] active:text-[#272822] "} >
+                                <svg fill="none" className=" w-8 p-0" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                                </svg>
+                                Chat
                             </NavLink>
                         </li>
                         <li>
@@ -72,6 +127,14 @@ export default function Layout() {
                         </li>
                         <li className=" px-12"></li>
 
+                        <li>
+                            <label onClick={handleLogout} className={({ isActive }) => isActive ? "font-bold bg-transparent active:bg-[#ff9787] active:text-[#272822]" : "active:bg-[#ff9787] active:text-[#272822] "} >
+                                <svg fill="none" className="w-8 p-0" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path>
+                                </svg>
+                                Log out
+                            </label>
+                        </li>
                     </div>
                 </ul>
 

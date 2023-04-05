@@ -23,6 +23,17 @@ export default function HistoryTable() {
             <HistoryCard />
             <HistoryCard />
             <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
         </>
     )
 }
