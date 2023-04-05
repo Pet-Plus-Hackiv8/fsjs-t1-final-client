@@ -1,8 +1,7 @@
-
 import gql from "graphql-tag";
 
 export const GET_PETSCHEDULE = gql`
- query FetchPetSchedule($petId: ID!) {
+  query FetchPetSchedule($petId: ID!) {
     fetchPetSchedule(PetId: $petId) {
       id
       complete
@@ -56,5 +55,15 @@ export const GET_PETSCHEDULE = gql`
   }
 `;
 
-
-
+export const POST_PET_SCHEDULE = gql`
+  mutation Mutation($newSchedule: scheduleForm) {
+    addPetSchedule(newSchedule: $newSchedule) {
+      id
+      complete
+      details
+      PetId
+      DoctorScheduleId
+      PetshopId
+    }
+  }
+`;

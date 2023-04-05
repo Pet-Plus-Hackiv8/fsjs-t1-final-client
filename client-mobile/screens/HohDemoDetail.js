@@ -11,12 +11,15 @@ const yScreen = Dimensions.get("window").height;
 export default function HohDemoDetail() {
   const navigation = useNavigation();
 
-  const { loading , error, data : service} = useQuery(GET_SERVICE
-    , {
+  const {
+    loading,
+    error,
+    data: service,
+  } = useQuery(GET_SERVICE, {
     variables: {
-      petshopId: 2
-    }
-  })
+      petshopId: 2,
+    },
+  });
 
   return (
     <View style={{ height: yScreen }}>
@@ -45,9 +48,13 @@ export default function HohDemoDetail() {
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
               type specimen book. It has survived not only five centuries
             </Text>
-            {service?.fetchService?.map(el=>{
-                return <Text key={el.id} tyle={{ color: "#4B8CA1" }}>{el.name} </Text>
-             })}
+            {service?.fetchService?.map((el) => {
+              return (
+                <Text key={el.id} tyle={{ color: "#4B8CA1" }}>
+                  {el.name}{" "}
+                </Text>
+              );
+            })}
           </View>
         </View>
       </ScrollView>

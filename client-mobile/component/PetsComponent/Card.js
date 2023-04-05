@@ -8,6 +8,9 @@ export default function Card() {
 
   return (
     <View style={{ marginVertical: 20 }}>
+      <TouchableOpacity style={{ backgroundColor: "#e3e7fa", alignSelf: "flex-end", right: 20, borderRadius: 10 }} onPress={() => navigation.navigate("addPet")}>
+        <Text style={{ fontSize: 20, fontWeight: "700", color: "#4B8CA1", padding: 5, paddingHorizontal: 10 }}>Add Pet</Text>
+      </TouchableOpacity>
       <ScrollView style={styles.eventMainView} showsHorizontalScrollIndicator={false}>
         <View style={{ marginVertical: 5 }}>
           <TouchableOpacity style={{ maxHeight: 200, display: "flex", flexDirection: "row" }} onPress={() => navigation.navigate("petsTabDetail")}>

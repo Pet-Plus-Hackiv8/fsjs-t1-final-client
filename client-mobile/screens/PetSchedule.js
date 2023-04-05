@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import { useQuery } from "@apollo/client";
 import { GET_PETSCHEDULE } from "../queries/petchedule";
 
-
 export default function PetSchedule() {
   const scheduleData = [
     {
@@ -26,23 +25,27 @@ export default function PetSchedule() {
     },
   ];
 
-  const { loading , error, data : schedule} = useQuery(GET_PETSCHEDULE, {
+  const {
+    loading,
+    error,
+    data: schedule,
+  } = useQuery(GET_PETSCHEDULE, {
     variables: {
-      petId: 1
-    }
-  })
+      petId: 1,
+    },
+  });
 
-  console.log(loading, error, schedule,">>>>>>>>>>>>>");
-
+  console.log(loading, error, schedule, ">>>>>>>>>>>>>");
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>
       <View>
         <Text style={styles.title}>{item?.Petshop?.name}</Text>
-        <Text style={styles.time}>{item?.DoctorSchedule?.day} - {item?.DoctorSchedule?.time}</Text>
+        <Text style={styles.time}>
+          {item?.DoctorSchedule?.day} - {item?.DoctorSchedule?.time}
+        </Text>
         <Text style={styles.time}>{item?.Petshop?.phoneNumber} </Text>
         <Text style={styles.time}>{item?.Petshop?.address} </Text>
-        
       </View>
       <View style={{ alignSelf: "center" }}>
         <Text style={{ fontSize: 16, color: "#333", textAlign: "center" }}>Status</Text>
