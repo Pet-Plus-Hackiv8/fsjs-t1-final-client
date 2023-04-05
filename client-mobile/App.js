@@ -143,6 +143,11 @@ export default function App() {
                   options={{ headerShown: false }}
                 />
                 <Stack.Screen
+                  name="hohDemo"
+                  component={HohDemoDetail}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
                   name="Chat"
                   component={TesChat}
                   options={{ headerShown: false }}
