@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useQuery } from "@apollo/client";
 
 const xScreen = Dimensions.get("window").width;
 const yScreen = Dimensions.get("window").height;
@@ -19,6 +20,10 @@ export default function PetDetailStack({ route }) {
   // console.log(pet)
   const { pet } = useRoute().params;
   console.log(pet);
+
+ 
+
+
 
   return (
     <View style={{ height: yScreen }}>

@@ -7,8 +7,12 @@ export default function Card({pet}) {
   const navigation = useNavigation();
 
   return (
+<<<<<<< HEAD
     <View style={{ marginVertical: 0 }}>
       
+=======
+    <View style={{ marginVertical: 20 }}>
+>>>>>>> 1d73419a969b2ea0f7322dae4a23bc85c6b819f8
       <ScrollView style={styles.eventMainView} showsHorizontalScrollIndicator={false}>
 
         <View style={{ marginVertical: 0 }}>

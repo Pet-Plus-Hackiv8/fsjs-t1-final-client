@@ -1,5 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
+import { useQuery } from "@apollo/client";
+import { GET_PETSCHEDULE } from "../queries/petchedule";
+
 
 export default function PetSchedule() {
   const scheduleData = [
@@ -23,22 +26,34 @@ export default function PetSchedule() {
     },
   ];
 
+  const { loading , error, data : schedule} = useQuery(GET_PETSCHEDULE, {
+    variables: {
+      petId: 1
+    }
+  })
+
+  console.log(loading, error, schedule,">>>>>>>>>>>>>");
+
+
   const renderItem = ({ item }) => (
     <View style={styles.item}>
       <View>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.time}>{item.time}</Text>
+        <Text style={styles.title}>{item?.Petshop?.name}</Text>
+        <Text style={styles.time}>{item?.DoctorSchedule?.day} - {item?.DoctorSchedule?.time}</Text>
+        <Text style={styles.time}>{item?.Petshop?.phoneNumber} </Text>
+        <Text style={styles.time}>{item?.Petshop?.address} </Text>
+        
       </View>
       <View style={{ alignSelf: "center" }}>
         <Text style={{ fontSize: 16, color: "#333", textAlign: "center" }}>Status</Text>
-        <Text style={{ fontSize: 16, fontWeight: "700", color: "#333", textAlign: "center" }}>{item.status}</Text>
+        <Text style={{ fontSize: 16, fontWeight: "700", color: "#333", textAlign: "center" }}>{item?.complete}</Text>
       </View>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <FlatList data={scheduleData} renderItem={renderItem} keyExtractor={(item) => item.id} />
+      <FlatList data={schedule?.fetchPetSchedule} renderItem={renderItem} keyExtractor={(item) => item.id} />
     </View>
   );
 }

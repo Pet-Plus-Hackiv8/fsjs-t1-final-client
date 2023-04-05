@@ -24,7 +24,11 @@ import PetMedicalRecord from "./screens/PetMedicalRecord";
 import DetailMedicalRecord from "./screens/DetailMedicalRecord";
 import { ApolloProvider } from "@apollo/client";
 import client from "./config/apollo";
+<<<<<<< HEAD
 import { AuthProvider } from "./auth";
+=======
+import HohDemoDetail from "./screens/HohDemoDetail";
+>>>>>>> 1d73419a969b2ea0f7322dae4a23bc85c6b819f8
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -114,6 +118,7 @@ function MainPage() {
 
 export default function App() {
   return (
+<<<<<<< HEAD
     <AuthProvider>
       <View style={styles.container}>
         <ApolloProvider client={client}>
@@ -182,6 +187,31 @@ export default function App() {
         </ApolloProvider>
       </View>
     </AuthProvider>
+=======
+    <View style={styles.container}>
+      <ApolloProvider client={client}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              {/* <Stack.Screen name="opening" component={OpeningPage} options={{ headerShown: false }} /> */}
+              <Stack.Screen name="login" component={Login} options={{ headerShown: false }} />
+              <Stack.Screen name="register" component={Register} options={{ headerShown: false }} />
+              <Stack.Screen name="mainPages" component={MainPage} options={{ headerShown: false }} />
+              <Stack.Screen name="detailClinic" component={DetailClinic} options={{ headerShown: false }} />
+              <Stack.Screen name="hohDemo" component={HohDemoDetail} options={{ headerShown: false }} />
+              <Stack.Screen name="Chat" component={TesChat} options={{ headerShown: false }} />
+              <Stack.Screen name="petsTabDetail" component={DetailPet} options={{ headerShown: false }} />
+              <Stack.Screen name="doctorList" component={DoctorList} options={{ title: "Our Doctor & Schedule" }} />
+              <Stack.Screen name="addPet" component={AddPetForm} options={{ headerShown: false }} />
+              <Stack.Screen name="petSchedules" component={PetSchedule} options={{ title: "My Schedule" }} />
+              <Stack.Screen name="petMedicalRecords" component={PetMedicalRecord} options={{ title: "Medical Record" }} />
+              <Stack.Screen name="detailMedicalRecords" component={DetailMedicalRecord} options={{ title: "Details" }} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SafeAreaView>
+      </ApolloProvider>
+    </View>
+>>>>>>> 1d73419a969b2ea0f7322dae4a23bc85c6b819f8
   );
 }
 

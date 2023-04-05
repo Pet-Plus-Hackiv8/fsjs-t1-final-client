@@ -45,6 +45,19 @@ export default function Login() {
     })
   }
 
+  // console.log(password, email, "<><><><><>< data");
+
+  let [loginUser, { data, loading, error, reset }] = useMutation(LOGIN_USER);
+
+  // const { loading, error, data } = useQuery(LOGIN_USER, {
+  //   variables: {
+  //     email,
+  //     password,
+  //   },
+  // });
+
+  const handleLogin = () => {};
+
   return (
     <View style={styles.container}>
       <Image

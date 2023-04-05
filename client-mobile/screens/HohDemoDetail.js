@@ -4,29 +4,19 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@apollo/client";
 import { GET_SERVICE } from "../queries/service";
-import { GET_ONESHOP } from "../queries/onePetshop";
 
 const xScreen = Dimensions.get("window").width;
 const yScreen = Dimensions.get("window").height;
 
-export default function DetailClinic({route}) {
+export default function HohDemoDetail() {
   const navigation = useNavigation();
-  const { clinicId, serviceId } = route.params
-  console.log(clinicId, "=> userId", serviceId , "shopId")
-  const { loading :loadingShop , error: errorShop, data : shop} = useQuery(GET_ONESHOP, {
-    variables: {
-      userId: +clinicId
-    }
-  })
+
   const { loading , error, data : service} = useQuery(GET_SERVICE
     , {
     variables: {
-      petshopId: serviceId
+      petshopId: 2
     }
   })
-
-  console.log(loading, error, service, "????????");
-  console.log(loadingShop,errorShop,shop, "XXXXXXXXXXX");
 
   return (
     <View style={{ height: yScreen }}>
@@ -34,18 +24,16 @@ export default function DetailClinic({route}) {
         <TouchableOpacity style={{ position: "absolute", zIndex: 10, marginHorizontal: 30, marginVertical: 50, backgroundColor: "white", padding: 10, borderRadius: 15 }} onPress={() => navigation.navigate("Clinic")}>
           <Image style={{ height: 20, width: 20 }} source={{ uri: "https://cdn-icons-png.flaticon.com/512/130/130882.png" }} />
         </TouchableOpacity>
-        <Image style={{ height: 400, width: xScreen }} source={{ uri: shop?.getShopById?.logo }} />
+        <Image style={{ height: yScreen / 1.6, width: xScreen }} source={{ uri: "https://i.pinimg.com/originals/95/e7/b5/95e7b509dd285cbf25140ebf22806383.gif" }} />
       </View>
       {/* <View style={{ borderTopEndRadius: 50, borderTopStartRadius: 50, position: "absolute", backgroundColor: "#e3e7fa", width: xScreen, height: 40, bottom: 15 }}></View> */}
-      <View style={{ height: 110,  backgroundColor: "#ffe9e7", borderRadius: 20, width: xScreen / 1.15, alignSelf: "center", zIndex: 30, elevation: 10, marginBottom:-50 }}>
-        <View style={{  }}>
-          <Text style={{ fontSize: 20, fontWeight: "bold", left: 20, marginTop: 15, color: "#4B8CA1" }}>{shop?.getShopById?.name}</Text>
-          <Text style={{ fontSize: 15, fontWeight: "400", left: 20, lineHeight: 20, color: "#4B8CA1" }}>{shop?.getShopById?.address}</Text>
+      <View style={{ height: 110, gap: 20, backgroundColor: "#ffe9e7", borderRadius: 20, width: xScreen / 1.15, alignSelf: "center", position: "absolute", zIndex: 30, top: 365, elevation: 10 }}>
+        <View style={{ marginTop: 20 }}>
+          <Text style={{ width: xScreen, fontSize: 20, fontWeight: "bold", left: 20, marginTop: 15, color: "#4B8CA1" }}>Hoh Pet Clinic</Text>
+          <Text style={{ width: xScreen, fontSize: 15, fontWeight: "400", left: 20, lineHeight: 20, color: "#4B8CA1" }}>Jl.Veteran</Text>
         </View>
       </View>
-      
-      <View style={{flex:1}}>
-      <ScrollView style={{  height: 300, paddingBottom: 100 }}>
+      <ScrollView style={{ flex: 1, height: 300 }}>
         <View style={{ gap: 20, backgroundColor: "white", top: 10, height: yScreen / 2 }}>
           <View style={{ marginTop: 20, height: 50 }}>
             {/* <Text style={{ width: xScreen, fontSize: 25, fontWeight: "bold", left: 20, lineHeight: 30, marginTop: 15, color: "#4B8CA1" }}>Randy</Text>
@@ -57,17 +45,15 @@ export default function DetailClinic({route}) {
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
               type specimen book. It has survived not only five centuries
             </Text>
-            <Text style={{ color: "#4B8CA1" }}>Available Service:  </Text>
             {service?.fetchService?.map(el=>{
                 return <Text key={el.id} tyle={{ color: "#4B8CA1" }}>{el.name} </Text>
              })}
           </View>
         </View>
       </ScrollView>
-      </View>
-      <View style={{ position: "absolute", bottom: 20, right: 5, display: "flex", flexDirection: "row", gap: 50, backgroundColor: "white" }}>
+      <View style={{ position: "absolute", top: 750, right: 5, display: "flex", flexDirection: "row", gap: 50 }}>
         <View style={{ alignSelf: "center", backgroundColor: "white", elevation: 5, borderRadius: 200, width: 50, alignItems: "center", justifyContent: "center", height: 45 }}>
-          <Ionicons name={"heart-outline"} size={45} style={{ elevation: 5, shadowColor: "#000", alignItems: "center", justifyContent: "center" }} />
+          <Ionicons name={"chatbubble-ellipses-outline"} size={40} style={{ elevation: 5, shadowColor: "#000", alignItems: "center", justifyContent: "center" }} onPress={() => navigation.navigate("Chat")} />
         </View>
         <TouchableOpacity onPress={() => navigation.navigate("doctorList")} style={{ marginRight: 30, backgroundColor: "#2e5767", width: 200, alignSelf: "flex-end", padding: 10, borderRadius: 20 }}>
           <Text style={{ textAlign: "center", color: "white", fontSize: 20, fontWeight: "500" }}>Book</Text>
