@@ -12,11 +12,7 @@ const yScreen = Dimensions.get("window").height;
 const xScreen = Dimensions.get("window").width;
 
 export default function Clinic() {
-  const {
-    loading,
-    error,
-    data: clinicData,
-  } = useQuery(GET_ALL_PETSHOP);
+  const { loading, error, data: clinicData } = useQuery(GET_ALL_PETSHOP);
   console.log(clinicData, ">>>>>>>");
 
   if (loading) {
@@ -37,7 +33,6 @@ export default function Clinic() {
       </View>
 
       {/* Top Home End ================================================================================================================= */}
-
       <ScrollView style={styles.maxScroll}>
         <PetClinic clinicData={clinicData} />
         {/* <View>
@@ -45,7 +40,6 @@ export default function Clinic() {
         </View> */}
       </ScrollView>
       <GoodDeals />
-
       <StatusBar style="auto" />
     </View>
   );

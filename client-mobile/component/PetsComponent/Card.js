@@ -3,23 +3,14 @@ import { useNavigation } from "@react-navigation/native";
 
 const yScreen = Dimensions.get("window").height;
 
-export default function Card({pet}) {
+export default function Card({ pet }) {
   const navigation = useNavigation();
 
   return (
-<<<<<<< HEAD
     <View style={{ marginVertical: 0 }}>
-      
-=======
-    <View style={{ marginVertical: 20 }}>
->>>>>>> 1d73419a969b2ea0f7322dae4a23bc85c6b819f8
       <ScrollView style={styles.eventMainView} showsHorizontalScrollIndicator={false}>
-
         <View style={{ marginVertical: 0 }}>
-          <TouchableOpacity 
-          style={{ maxHeight: 200, display: "flex", flexDirection: "row" }} 
-          onPress={() => navigation.navigate("petsTabDetail", {pet: pet})}>
-
+          <TouchableOpacity style={{ maxHeight: 200, display: "flex", flexDirection: "row" }} onPress={() => navigation.navigate("petsTabDetail", { pet: pet })}>
             <View style={{ backgroundColor: "#e3e7fa", borderRadius: 20, borderBottomEndRadius: 10, borderTopEndRadius: 5, minHeight: 160, minWidth: 160, justifyContent: "center", alignItems: "center" }}>
               <Image style={{ width: 145, height: 145, resizeMode: "cover", borderRadius: 20 }} source={{ uri: pet.imgUrl }} />
             </View>
@@ -29,7 +20,6 @@ export default function Card({pet}) {
             </View>
           </TouchableOpacity>
         </View>
-
       </ScrollView>
     </View>
   );

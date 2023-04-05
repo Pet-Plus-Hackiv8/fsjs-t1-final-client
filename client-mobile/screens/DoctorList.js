@@ -13,9 +13,6 @@ export default function DoctorList() {
     <View style={styles.container}>
       <ScrollView style={styles.maxScroll}>
         <List />
-        {/* <View>
-          <Image style={{ width: 150, height: 90, alignSelf: "center", borderRadius: 500, marginBottom: 10 }} source={{ uri: "https://i.ibb.co/3TCj30Y/ezgif-com-gif-maker-6.gif" }} />
-        </View> */}
       </ScrollView>
 
       <StatusBar style="auto" />
