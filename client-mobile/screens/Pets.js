@@ -20,17 +20,24 @@ import { GET_PET_BY_USER_ID } from "../queries/index";
 const yScreen = Dimensions.get("window").height;
 const xScreen = Dimensions.get("window").width;
 import OpeningPage from "../screens/OpeningPage";
+import { useContext } from "react";
+import { AuthContext } from "../auth";
+
+
+
 export default function Pets() {
+  const { setAccessToken, accessToken, setUserId, UserId } = useContext(AuthContext);
   const { loading, error, data } = useQuery(GET_PET_BY_USER_ID, {
-    variables: { userId: 2 },
+    variables: { userId: 3 },
   });
-  // const jobs = data.getJobs
+  console.log(UserId, "{}{}{}")
 
   if (loading) {
     return <OpeningPage />;
   }
 
-  console.log(data, "<><><>");
+  console.log(accessToken, "<><><>");
+  console.log(UserId, "<><><>");
 
   return (
     <View style={styles.container}>
@@ -78,13 +85,13 @@ export default function Pets() {
             Add Pet
           </Text>
         </TouchableOpacity>
+      </ScrollView>
         <FlatList
           data={data.fetchPets}
           renderItem={({ item }) => <Card pet={item} />}
           keyExtractor={(item) => item.id}
-          style={{ backgroundColor: "white", width: "100%" }}
+          style={{ backgroundColor: "white", width: "100%", marginTop: -280}}
         />
-      </ScrollView>
 
       <StatusBar style="auto" />
     </View>

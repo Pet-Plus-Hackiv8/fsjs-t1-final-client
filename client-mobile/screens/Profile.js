@@ -13,13 +13,28 @@ import { AuthContext } from "../auth";
 import { useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import OpeningPage from "../screens/OpeningPage";
+import { useQuery } from "@apollo/client";
+import { USER_BY_ID } from "../queries";
+
 
 const xScreen = Dimensions.get("window").width;
 const yScreen = Dimensions.get("window").height;
 
 export default function Profile() {
-  const { setAccessToken, accessToken } = useContext(AuthContext);
-  const navigation = useNavigation()
+  const { setAccessToken, accessToken, setUserId, UserId } = useContext(AuthContext);
+  const { loading, error, data } = useQuery(USER_BY_ID, {
+    variables: { userById: 2 },
+  });
+  console.log(UserId, "{}{}{}")
+
+  if (loading || error) {
+    console.log(error)
+    return <OpeningPage />;
+  }
+  console.log(data, "USER DATA")
+  
+  const navigation = useNavigation();
   return (
     <ScrollView style={{ paddingBottom: 40, backgroundColor: "white" }}>
       <ScrollView style={styles.container}>
@@ -32,18 +47,18 @@ export default function Profile() {
                 borderRadius: 30,
               }}
               source={{
-                uri: "https://i.pinimg.com/564x/cd/80/4b/cd804b46abaad65369e85b527307af4d.jpg",
+                uri: data.userById.imgUrl,
               }}
             />
           </View>
           <View>
             <Text style={{ fontSize: 30, fontWeight: "500" }}>
-              Zio Kandakha
+              {data.userById.fullName}
             </Text>
             <View style={{ display: "flex", flexDirection: "row" }}>
               <Ionicons name={"at-outline"} size={25} />
               <Text style={{ fontSize: 15, fontWeight: "400" }}>
-                maximumpride99
+              {data.userById.email}
               </Text>
             </View>
           </View>
@@ -65,7 +80,7 @@ export default function Profile() {
             <Text
               style={{ fontSize: 15, fontWeight: "400", alignSelf: "center" }}
             >
-              Jakarta Selatan | Pondok Indah
+              Jakarta Selatan | {data.userById.address}
             </Text>
           </View>
           <View
@@ -86,14 +101,14 @@ export default function Profile() {
             <Text
               style={{ fontSize: 15, fontWeight: "400", alignSelf: "center" }}
             >
-              +62 8218 8778 899
+              +{data.userById.phoneNumber}
             </Text>
           </View>
           <TouchableOpacity
             onPress={() => {
               setAccessToken("");
               AsyncStorage.removeItem("accessToken");
-              navigation.navigate("login")
+              navigation.navigate("login");
             }}
           >
             <View

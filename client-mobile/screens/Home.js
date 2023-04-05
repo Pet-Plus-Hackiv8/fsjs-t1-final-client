@@ -1,4 +1,13 @@
-import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from "react-native";
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
 import Services from "../component/HomeComponent/Services";
@@ -8,10 +17,16 @@ import { useNavigation } from "@react-navigation/native";
 
 import { GET_POSTS } from "../queries/posts";
 import { useQuery } from "@apollo/client";
+import { useContext } from "react";
+import { AuthContext } from "../auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const yScreen = Dimensions.get("window").height;
 
 export default function Home() {
+  const { setAccessToken, accessToken, setUserId, UserId, username } =
+    useContext(AuthContext);
   const { loading, error, data } = useQuery(GET_POSTS, {
     variables: {
       petshopId: 1,
@@ -24,9 +39,17 @@ export default function Home() {
     <View style={styles.container}>
       <View>
         <View style={styles.topHome}>
-          <TouchableOpacity style={styles.profile} onPress={() => navigation.navigate("Profile")}>
-            <Image style={styles.profileImage} source={{ uri: "https://media.giphy.com/media/ZE6Aa9S2ViLVhqNqL2/giphy.gif" }} />
-            <Text style={styles.profileName}>Zio Kandakha </Text>
+          <TouchableOpacity
+            style={styles.profile}
+            onPress={() => navigation.navigate("Profile")}
+          >
+            <Image
+              style={styles.profileImage}
+              source={{
+                uri: "https://media.giphy.com/media/ZE6Aa9S2ViLVhqNqL2/giphy.gif",
+              }}
+            />
+            <Text style={styles.profileName}>{username}</Text>
           </TouchableOpacity>
           {/* <TouchableOpacity style={styles.profileLocation} onPress={() => navigation.navigate("Chat")}>
             <Text style={styles.profileName}></Text>
@@ -38,6 +61,32 @@ export default function Home() {
       {/* Top Home End ================================================================================================================= */}
 
       <ScrollView style={styles.maxScroll}>
+        {/* <TouchableOpacity
+          onPress={() => {
+            setAccessToken("");
+            AsyncStorage.removeItem("accessToken");
+            navigation.navigate("login");
+          }}
+        >
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              backgroundColor: "#e3e7fa",
+              padding: 8,
+              borderRadius: 10,
+              elevation: 5,
+            }}
+          >
+            <Text
+              style={{ fontSize: 15, fontWeight: "400", textAlign: "center" }}
+            >
+              Logout
+            </Text>
+          </View>
+        </TouchableOpacity> */}
+
         <Services />
         <Event />
         <GoodDeals />

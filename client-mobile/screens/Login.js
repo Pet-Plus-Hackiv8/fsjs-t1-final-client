@@ -17,7 +17,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
   const navigation = useNavigation();
-  const { setAccessToken, accessToken } = useContext(AuthContext);
+  const { setAccessToken, accessToken, setUserId, UserId, username, setUsername } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,23 +40,19 @@ export default function Login() {
     }).then(({ data }) => {
       console.log(data);
       setAccessToken(data.login.access_token);
+      setUserId(data.login.UserId)
+      setUsername(data.login.username)
+      console.log(data.login)
       AsyncStorage.setItem("accessToken", data.login.access_token);
+      AsyncStorage.setItem("UserId", data.login.UserId);
+      AsyncStorage.setItem("username", data.login.username);
+      // AsyncStorage.setItem("UserId", data.login.access_token);
       navigation.navigate("mainPages");
     })
+      .catch((err) => {
+        console.log(err, "error")
+      })
   }
-
-  // console.log(password, email, "<><><><><>< data");
-
-  let [loginUser, { data, loading, error, reset }] = useMutation(LOGIN_USER);
-
-  // const { loading, error, data } = useQuery(LOGIN_USER, {
-  //   variables: {
-  //     email,
-  //     password,
-  //   },
-  // });
-
-  const handleLogin = () => {};
 
   return (
     <View style={styles.container}>

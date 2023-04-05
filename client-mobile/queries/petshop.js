@@ -1,19 +1,18 @@
 import { gql } from "@apollo/client";
 
 export const GET_ALL_PETSHOP = gql`
-  query Query {
-    getAllPetshops {
+  query GetAllPetshops($serviceFilter: String, $nameFilter: String) {
+    getAllPetshops(serviceFilter: $serviceFilter, nameFilter: $nameFilter) {
       id
       name
       logo
       address
-      location {
-        type
-        coordinates
-      }
       phoneNumber
       UserId
-      PhoneNumber
+      location {
+        coordinates
+        type
+      }
     }
   }
 `;
