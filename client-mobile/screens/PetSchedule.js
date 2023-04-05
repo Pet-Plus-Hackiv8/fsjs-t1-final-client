@@ -35,6 +35,16 @@ export default function PetSchedule() {
     },
   });
 
+  const colorData = () => {
+    if (scheduleData.status === "ongoing") {
+      return "blue";
+    } else if (scheduleData.status === "Done") {
+      return "green";
+    } else {
+      return "red";
+    }
+  };
+
   console.log(loading, error, schedule, ">>>>>>>>>>>>>");
 
   const renderItem = ({ item }) => (

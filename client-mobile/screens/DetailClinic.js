@@ -78,7 +78,7 @@ export default function DetailClinic({ route }) {
       </View>
       <View style={{ position: "absolute", bottom: 20, right: 5, display: "flex", flexDirection: "row", gap: 50, backgroundColor: "white" }}>
         <View style={{ alignSelf: "center", backgroundColor: "white", elevation: 5, borderRadius: 200, width: 50, alignItems: "center", justifyContent: "center", height: 45 }}>
-          <Ionicons name={"heart-outline"} size={45} style={{ elevation: 5, shadowColor: "#000", alignItems: "center", justifyContent: "center" }} />
+          <Ionicons name={"chatbubble-ellipses-outline"} size={40} style={{ elevation: 5, shadowColor: "#000", alignItems: "center", justifyContent: "center" }} onPress={() => navigation.navigate("Chat")} />
         </View>
         <TouchableOpacity onPress={() => navigation.navigate("doctorList")} style={{ marginRight: 30, backgroundColor: "#2e5767", width: 200, alignSelf: "flex-end", padding: 10, borderRadius: 20 }}>
           <Text style={{ textAlign: "center", color: "white", fontSize: 20, fontWeight: "500" }}>Book</Text>

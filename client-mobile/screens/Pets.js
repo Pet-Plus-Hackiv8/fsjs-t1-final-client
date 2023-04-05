@@ -1,14 +1,4 @@
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  TextInput,
-  FlatList,
-} from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
 import MarqueeText from "react-native-text-ticker";
@@ -20,7 +10,11 @@ import { GET_PET_BY_USER_ID } from "../queries/index";
 const yScreen = Dimensions.get("window").height;
 const xScreen = Dimensions.get("window").width;
 import OpeningPage from "../screens/OpeningPage";
+import { useNavigation } from "@react-navigation/native";
+
 export default function Pets() {
+  const navigation = useNavigation();
+
   const { loading, error, data } = useQuery(GET_PET_BY_USER_ID, {
     variables: { userId: 2 },
   });
@@ -43,11 +37,7 @@ export default function Pets() {
                 uri: "https://i.ibb.co/3TCj30Y/ezgif-com-gif-maker-6.gif",
               }}
             />
-            <Text
-              style={{ fontSize: 30, fontWeight: "bold", color: "#2e5767" }}
-            >
-              My Pets
-            </Text>
+            <Text style={{ fontSize: 30, fontWeight: "bold", color: "#2e5767" }}>My Pets</Text>
           </View>
         </View>
       </View>
@@ -62,7 +52,7 @@ export default function Pets() {
             alignSelf: "flex-end",
             right: 20,
             borderRadius: 10,
-            marginBottom: 20
+            marginBottom: 20,
           }}
           onPress={() => navigation.navigate("addPet")}
         >
@@ -78,13 +68,8 @@ export default function Pets() {
             Add Pet
           </Text>
         </TouchableOpacity>
-        <FlatList
-          data={data.fetchPets}
-          renderItem={({ item }) => <Card pet={item} />}
-          keyExtractor={(item) => item.id}
-          style={{ backgroundColor: "white", width: "100%" }}
-        />
       </ScrollView>
+      <FlatList data={data.fetchPets} renderItem={({ item }) => <Card pet={item} />} keyExtractor={(item) => item.id} style={{ backgroundColor: "white", width: "100%", marginTop: -280 }} />
 
       <StatusBar style="auto" />
     </View>
@@ -113,6 +98,6 @@ const styles = StyleSheet.create({
   },
   maxScroll: {
     marginBottom: 110,
-    backgroundColor: 'white'
+    backgroundColor: "white",
   },
 });

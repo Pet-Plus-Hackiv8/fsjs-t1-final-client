@@ -38,23 +38,27 @@ export default function HohDemoDetail() {
       </View>
       <ScrollView style={{ flex: 1, height: 300 }}>
         <View style={{ gap: 20, backgroundColor: "white", top: 10, height: yScreen / 2 }}>
-          <View style={{ marginTop: 20, height: 50 }}>
+          <View style={{ marginTop: 0, height: 50 }}>
             {/* <Text style={{ width: xScreen, fontSize: 25, fontWeight: "bold", left: 20, lineHeight: 30, marginTop: 15, color: "#4B8CA1" }}>Randy</Text>
             <Text style={{ width: xScreen, fontSize: 15, fontWeight: "400", left: 20, lineHeight: 20, color: "#4B8CA1" }}>Breed : Siberian</Text> */}
           </View>
-          <View style={{ marginHorizontal: 25, marginVertical: 10 }}>
+          <View style={{ marginHorizontal: 25, marginBottom: 10 }}>
             <Text style={{ color: "#4B8CA1" }}>Details </Text>
             <Text style={{ fontWeight: "500", fontSize: 13, color: "#4B8CA1" }}>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
               type specimen book. It has survived not only five centuries
             </Text>
-            {service?.fetchService?.map((el) => {
-              return (
-                <Text key={el.id} tyle={{ color: "#4B8CA1" }}>
-                  {el.name}{" "}
-                </Text>
-              );
-            })}
+            <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, marginTop: 5 }}>
+              {service?.fetchService?.map((el) => {
+                return (
+                  <View style={{ backgroundColor: "rgba(200, 105, 255, 10)", padding: 5, borderRadius: 10 }}>
+                    <Text key={el.id} style={{ color: "#fff", fontSize: 10, fontWeight: "900" }}>
+                      {el.name}{" "}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
           </View>
         </View>
       </ScrollView>
