@@ -1,16 +1,54 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng } from "react-places-autocomplete";
 import { useState } from "react";
+import FormData from "form-data"
+import { useMutation } from "@apollo/client";
+import { CREATE_PETSHOP } from "../queries/petshop";
+import LoadingScreen from "../components/LoadingScreen";
 
 
 export default function CreateClinic() {
+    const navigate = useNavigate()
+
     const [formData, setFormData] = useState({
         name: "",
         logo: "",
         phoneNumber: "",
         address: "",
-        latlng: {}
+        latlng: {},
+        latitude: "",
+        longitude: "",
+        userId: Number(localStorage.getItem("UserId"))
     })
+
+    const [createPetshop, { loading, data, error }] = useMutation(CREATE_PETSHOP);
+
+    const submitForm = async (e) => {
+        e.preventDefault();
+
+        const { latlng, ...newData } = formData;
+        console.log({
+            ...newData,
+            longitude: latlng.lng,
+            latitude: latlng.lat,
+        })
+
+        await createPetshop({
+            variables: {
+                ...newData,
+                longitude: latlng.lng.toString(),
+                latitude: latlng.lat.toString(),
+            }
+        })
+        navigate('/');
+    }
+
+    const handleChange = ({ name, value }) => {
+        setFormData({
+            ...formData,
+            [name]: value
+        })
+    }
 
     const handleChangeAddress = value => {
         setFormData({
@@ -32,6 +70,24 @@ export default function CreateClinic() {
         } catch (error) {
             console.log(error)
         }
+    }
+
+
+    const fileData = new FormData()
+    const handleFile = async ({ files }) => {
+        const [file] = files
+        // console.log(file, "<<<<<<<<<<")
+        fileData.append('file', file);
+        // console.log(fileData.get('file'))
+        setFormData({
+            ...formData,
+            logo: await fileData.get('file')
+        })
+    }
+
+
+    if (loading) {
+        return <LoadingScreen />
     }
 
     const renderFunc = ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
@@ -74,20 +130,15 @@ export default function CreateClinic() {
                     <div className="flex flex-col items-center">
                         <h1 className="text-3xl font-bold">Register Clinic</h1>
                     </div>
-                    <div className="text-sm breadcrumbs mt-4">
-                        <ul>
-                            <li><label className=" link cursor-default font-semibold text-gray-400"> Create Account</label></li>
-                            <li><label className=" link cursor-default font-semibold"> Manage Clinic</label></li>
-                        </ul>
-                    </div>
-                    <form className=" mt-2">
+
+                    <form onSubmit={submitForm} className=" mt-2">
                         <div>
                             <div className=" py-2"> Name :</div>
-                            <input type="text" placeholder="Enter your clinic name" className="input input-bordered input-secondary w-full " />
+                            <input value={formData.name} name="name" onChange={({ target }) => handleChange(target)} type="text" placeholder="Enter your clinic name" className="input input-bordered input-secondary w-full " />
                         </div>
                         <div>
                             <div className=" py-2"> Contact Number :</div>
-                            <input type="text" placeholder="Enter your clinic's contact number" className="input input-bordered input-secondary w-full " />
+                            <input value={formData.phoneNumber} name="phoneNumber" onChange={({ target }) => handleChange(target)} type="text" placeholder="Enter your clinic's contact number" className="input input-bordered input-secondary w-full " />
                         </div>
                         <div className="">
                             <div className=" py-2"> Address :</div>
@@ -104,13 +155,18 @@ export default function CreateClinic() {
                             <div className=" py-2">
                                 Logo :
                             </div>
-                            <input type="file" className="file-input file-input-bordered file-input-secondary w-full" />
+                            <input name="imageUrl" onChange={({ target }) => handleFile(target)} type="file" className="file-input file-input-bordered file-input-secondary w-full" />
                         </div>
                         <button type="submit" className=" mt-6 flex justify-center font-semibold hover:cursor-pointer py-3 px-4 w-full rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
                             <span className=" select-none">
                                 Register Clinic
                             </span>
                         </button >
+                        <label type="submit" className=" mt-6 flex justify-center font-semibold hover:cursor-pointer py-3 px-4 w-full rounded-md bg-sky-300 hover:bg-sky-400 active:bg-sky-300 active:scale-95 duration-200 ">
+                            <span className=" select-none">
+                                Back
+                            </span>
+                        </label >
                     </form>
                 </div>
                 <div className=" rounded-r-md  w-1/2 border-l-2 bg-gray-700  flex justify-center items-center">

@@ -2,6 +2,10 @@ import HistoryTable from "../components/Tables/HistoryTable";
 
 export default function History() {
 
+
+
+
+
     
     return (
         <>

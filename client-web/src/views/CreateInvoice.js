@@ -26,22 +26,22 @@ export default function CreateInvoice() {
     let invoice = {
         newPost: {
             PetshopId: Number(localStorage.getItem("petshopId")),
-            PetScheduleId: id,
-            PetId: petId,
-            DoctorId: doctorId
+            PetScheduleId: Number(id),
+            PetId: Number(petId),
+            DoctorId: Number(doctorId)
         }
     }
 
     const getDoctor = useQuery(GET_DOCTOR, {
         variables: {
-            doctorId: doctorId,
+            doctorId: Number(doctorId),
             petshopId: Number(localStorage.getItem("petshopId"))
         }
     })
 
     const getPet = useQuery(GET_PET, {
         variables: {
-            fetchPetId: petId
+            fetchPetId: Number(petId)
         }
     })
 
@@ -86,7 +86,8 @@ export default function CreateInvoice() {
         invoice.newPost.notes = note
         invoice.newPost.Actions = actions
         console.log(invoice)
-        navigate('/')
+
+        navigate('/histories')
         await makeRecord({
             variables: invoice
         })
@@ -99,16 +100,21 @@ export default function CreateInvoice() {
 
     const addAction = (e) => {
         e.preventDefault()
-        let temp = structuredClone(actions)
-        // console.log(action, actions)
-        temp.push(action);
-        setActions(temp)
+        let arr = structuredClone(actions)
+        let obj = structuredClone(action)
+        obj.ServiceId = Number(obj.ServiceId)
+        obj.totalPrice = Number(obj.totalPrice)
+
+        console.log(obj);
+        arr.push(obj);
+        setActions(arr)
         setAction({
             ServiceId: 0,
             totalPrice: "",
             document: "-"
         })
         document.getElementById('action_modal').checked = false;
+        console.log("selesai add action")
     }
 
     // console.log(actions)
@@ -145,7 +151,7 @@ export default function CreateInvoice() {
     }
 
     let total = actions.reduce((accumulator, el) => {
-        return accumulator + Number(el.totalPrice);
+        return accumulator + el.totalPrice;
     }, 0);
 
     let renderQR = (link) => {
@@ -206,7 +212,7 @@ export default function CreateInvoice() {
                                 Time
                             </div>
                             <div className=" text-lg">
-                                : {new Date().toLocaleString() + ""}
+                                : 5 April 2023
                             </div>
                         </div>
                     </div>
@@ -299,13 +305,9 @@ export default function CreateInvoice() {
                             <div>
                                 <h3 className="text-lg font-bold">Payment link</h3>
                                 <div className="text-lg p-20 link link-primary">
-                                    {data ? renderQR(data.generateInvoice.invoice) : ""}
-
-                                    {/* <a href={data?.generateInvoice.invoice} target="_blank" rel="noreferrer">
-                                        {
-                                            data?.generateInvoice.invoice
-                                        }
-                                    </a> */}
+                                    <a href={data?.generateInvoice.invoice} target="_blank" rel="noreferrer">
+                                        {data ? renderQR(data.generateInvoice.invoice) : ""}
+                                    </a>
                                 </div>
                                 <div className=" flex justify-end gap-4">
                                     <label onClick={createRecord} htmlFor="payment_modal" className=" flex font-semibold justify-center hover:cursor-pointer py-3 px-4 w-28 rounded-md bg-emerald-300 hover:bg-emerald-400 active:bg-emerald-300 active:scale-95 duration-200 ">
@@ -361,7 +363,7 @@ export default function CreateInvoice() {
                                             {
                                                 servicesData.map((el, i) => {
                                                     return (
-                                                        <option key={i} value={el.id} >{el.name}</option>
+                                                        <option key={i} value={Number(el.id)} >{el.name}</option>
                                                     )
                                                 })
                                             }

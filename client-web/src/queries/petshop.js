@@ -16,3 +16,15 @@ query GetShopById($userId: Int) {
     id
   }
 }`
+
+export const CREATE_PETSHOP = gql`
+mutation PostPetshop($name: String, $address: String, $latitude: String, $longitude: String, $phoneNumber: String, $userId: Int, $logo: Upload) {
+  postPetshop(name: $name, address: $address, latitude: $latitude, longitude: $longitude, phoneNumber: $phoneNumber, UserId: $userId, logo: $logo) {
+    id
+    name
+    phoneNumber
+    logo
+    address
+    PhoneNumber
+  }
+}`

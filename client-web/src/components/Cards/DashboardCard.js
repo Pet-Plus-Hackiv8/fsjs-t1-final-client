@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import { GET_DOCTOR } from "../../queries/doctors";
 import LoadingScreen from "../LoadingScreen";
 
-export default function DashboardCard({ schedule }) {
+export default function DashboardCard({ schedule, no }) {
     // console.log(schedule)
     const navigate = useNavigate();
 
@@ -26,8 +26,11 @@ export default function DashboardCard({ schedule }) {
 
     return (
         <div className="h-24 my-2 rounded-xl w-full flex items-center justify-between bg-[#eafdfc] shadow-md">
-            <div className=" w-3/12 pl-4">
-                <div className=" font-semibold text-[#567096] duration-200">
+            <div className="  w-1/12 select-none pl-4">
+                {no}
+            </div>
+            <div className=" w-3/12">
+                <div className=" font-semibold text-lg text-[#567096] duration-200">
                     <NavLink to={`/pet/owner/${schedule.Pet.id}`} className=" hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 duration-200 active:text-[#ff9787] select-none  w-fit">
                         {schedule.Pet.name}
                     </NavLink>

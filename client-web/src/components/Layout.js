@@ -1,29 +1,42 @@
 import { useQuery } from "@apollo/client";
 import { useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { GET_PETSHOP } from "../queries/petshop";
 import LoadingScreen from "./LoadingScreen";
-
-
 
 export default function Layout() {
     const navigate = useNavigate()
     const changePage = (page) => {
         navigate(page)
     }
-    const handleLogout = () => {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("UserId");
-        localStorage.removeItem("petshopPhone");
-        localStorage.removeItem("petshopLon");
-        localStorage.removeItem("talkjs:desktop_notify");
-        localStorage.removeItem("petshopNumber");
-        localStorage.removeItem("petshopId");
-        localStorage.removeItem("petshopName");
-        localStorage.removeItem("petshopLat");
-        localStorage.removeItem("petshopAddress");
 
-        changePage("/login")
+    const handleLogout = () => {
+        Swal.fire({
+            title: 'Do you want to log out?',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Log out'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("UserId");
+                localStorage.removeItem("petshopPhone");
+                localStorage.removeItem("petshopLon");
+                localStorage.removeItem("talkjs:desktop_notify");
+                localStorage.removeItem("petshopNumber");
+                localStorage.removeItem("petshopId");
+                localStorage.removeItem("petshopName");
+                localStorage.removeItem("petshopLat");
+                localStorage.removeItem("petshopAddress");
+
+                changePage("/login")
+                Swal.fire(
+                    'Logged out',
+                )
+            }
+        })
     }
     const { loading, error, data } = useQuery(GET_PETSHOP, {
         variables: {
@@ -31,8 +44,11 @@ export default function Layout() {
         }
     })
 
+    console.log({ loading, error, data })
+
     if (data) {
-        // console.log(data.getShopById)
+        // console.log(data)
+        console.log("masuk sinis")
         localStorage.setItem("petshopId", data.getShopById.id)
         localStorage.setItem("petshopName", data.getShopById.name)
         localStorage.setItem("petshopNumber", data.getShopById.phoneNumber)
@@ -43,6 +59,11 @@ export default function Layout() {
 
     if (loading) {
         return <LoadingScreen />
+    }
+
+    if (error) {
+        navigate('/register/clinic')
+        return null
     }
 
     return (<>
@@ -73,13 +94,13 @@ export default function Layout() {
 
                         <div tabIndex="0" className="avatar w-full p-20 py-0">
                             <div className="w-full rounded-full">
-                                <img src={data.getShopById.logo} />
+                                <img src={data?.getShopById.logo} />
                             </div>
                         </div>
                         <li>
                             <NavLink to="/profile" className={({ isActive }) => isActive ? "font-bold bg-transparent active:bg-[#ff9787] active:text-[#272822]" : "active:bg-[#ff9787] active:text-[#272822] "} >
                                 <div className=" text-lg flex justify-center w-full">
-                                    {data.getShopById.name}
+                                    {data?.getShopById.name}
                                 </div>
                             </NavLink>
                         </li>

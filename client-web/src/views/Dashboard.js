@@ -10,7 +10,7 @@ export default function ClinicProfile() {
         }
     })
 
-    console.log(data)
+    
     if (loading) {
         return <LoadingScreen />
     }
@@ -22,7 +22,7 @@ export default function ClinicProfile() {
                         Posts :
                     </div>
                     <div className=" w-full flex justify-end text-4xl">
-                        4
+                        2
                     </div>
                 </div>
                 <div className="  md:w-1/5 w-full bg-emerald-100 p-8 rounded-xl shadow-md">
@@ -30,7 +30,7 @@ export default function ClinicProfile() {
                         Veterinarians :
                     </div>
                     <div className=" w-full flex justify-end text-4xl">
-                        3
+                        2
                     </div>
                 </div>
                 <div className="  md:w-1/5 w-full bg-blue-100 p-8 rounded-xl shadow-md">
@@ -38,7 +38,7 @@ export default function ClinicProfile() {
                         Services :
                     </div>
                     <div className=" w-full flex justify-end text-4xl">
-                        12
+                        7
                     </div>
                 </div>
                 <div className="  md:w-1/5 w-full bg-fuchsia-100 p-8 rounded-xl shadow-md">
@@ -46,7 +46,7 @@ export default function ClinicProfile() {
                         Medical Records :
                     </div>
                     <div className=" w-full flex justify-end text-4xl">
-                        40
+                        0
                     </div>
                 </div>
             </div>
