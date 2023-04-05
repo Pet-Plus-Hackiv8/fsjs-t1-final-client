@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext({
   accessToken: "",
-  UserId: 0,
+  UserId: "",
   username: "",
 
   setAccessToken: "",
@@ -19,14 +19,17 @@ export function AuthProvider({children}) {
         AsyncStorage.getItem("accessToken")
             .then((val) => {
                 setAccessToken(val)
+                console.log(val, "ACCESS TOKEN")
             })
         AsyncStorage.getItem("UserId")
             .then((val) => {
+                console.log(val, "USER ID")
                 setUserId(val)
             })
         AsyncStorage.getItem("username")
             .then((val) => {
                 setUsername(val)
+                console.log((val, "USERNAME"))
             })
     }, [])
     return (

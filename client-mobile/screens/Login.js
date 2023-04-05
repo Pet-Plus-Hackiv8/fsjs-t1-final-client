@@ -38,11 +38,12 @@ export default function Login() {
         password,
       },
     }).then(({ data }) => {
-      console.log(data);
+      console.log(data, "RETURN LOGIN");
       setAccessToken(data.login.access_token);
       setUserId(data.login.UserId)
       setUsername(data.login.username)
       console.log(data.login)
+      
       AsyncStorage.setItem("accessToken", data.login.access_token);
       AsyncStorage.setItem("UserId", data.login.UserId);
       AsyncStorage.setItem("username", data.login.username);

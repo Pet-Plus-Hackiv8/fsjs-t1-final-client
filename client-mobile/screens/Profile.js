@@ -22,11 +22,12 @@ const xScreen = Dimensions.get("window").width;
 const yScreen = Dimensions.get("window").height;
 
 export default function Profile() {
-  const { setAccessToken, accessToken, setUserId, UserId } = useContext(AuthContext);
+  const { setAccessToken, accessToken, setUserId, UserId, username } =
+    useContext(AuthContext);
   const { loading, error, data } = useQuery(USER_BY_ID, {
     variables: { userById: 2 },
   });
-  console.log(UserId, "{}{}{}")
+  console.log(UserId, username, "{}{}{}")
 
   if (loading || error) {
     console.log(error)
@@ -53,7 +54,8 @@ export default function Profile() {
           </View>
           <View>
             <Text style={{ fontSize: 30, fontWeight: "500" }}>
-              {data.userById.fullName}
+              {/* {data.userById.fullName} */}
+              {username}
             </Text>
             <View style={{ display: "flex", flexDirection: "row" }}>
               <Ionicons name={"at-outline"} size={25} />

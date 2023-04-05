@@ -21,7 +21,6 @@ import { useContext } from "react";
 import { AuthContext } from "../auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 const yScreen = Dimensions.get("window").height;
 
 export default function Home() {
@@ -49,7 +48,7 @@ export default function Home() {
                 uri: "https://media.giphy.com/media/ZE6Aa9S2ViLVhqNqL2/giphy.gif",
               }}
             />
-            <Text style={styles.profileName}>{username}</Text>
+            <Text style={styles.profileName}>{UserId}</Text>
           </TouchableOpacity>
           {/* <TouchableOpacity style={styles.profileLocation} onPress={() => navigation.navigate("Chat")}>
             <Text style={styles.profileName}></Text>
@@ -61,7 +60,7 @@ export default function Home() {
       {/* Top Home End ================================================================================================================= */}
 
       <ScrollView style={styles.maxScroll}>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           onPress={() => {
             setAccessToken("");
             AsyncStorage.removeItem("accessToken");
@@ -85,7 +84,7 @@ export default function Home() {
               Logout
             </Text>
           </View>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
         <Services />
         <Event />

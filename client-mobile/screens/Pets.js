@@ -28,7 +28,7 @@ import { AuthContext } from "../auth";
 export default function Pets() {
   const { setAccessToken, accessToken, setUserId, UserId } = useContext(AuthContext);
   const { loading, error, data } = useQuery(GET_PET_BY_USER_ID, {
-    variables: { userId: 3 },
+    variables: { userId: 2 },
   });
   console.log(UserId, "{}{}{}")
 

@@ -35,8 +35,9 @@ export default function Clinic({ route }) {
 
   useEffect(() => {
     if (route.params) {
+      setService(route.params.serviceName)
       refetch({
-        serviceFilter: route.params.serviceName,
+        serviceFilter: service,
       });
     }
   }, [route.params]);
@@ -63,7 +64,8 @@ export default function Clinic({ route }) {
               onSubmitEditing={() => {
                 refetch({
                   nameFilter: vetName,
-                });
+                })
+                setService("")
               }}
             />
           </View>
