@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 // const { createUploadLink } = require('apollo-upload-client')
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  uri: "https://b56c-139-228-111-126.ap.ngrok.io/graphql",
   cache: new InMemoryCache(),
   // link: createUploadLink()
 });

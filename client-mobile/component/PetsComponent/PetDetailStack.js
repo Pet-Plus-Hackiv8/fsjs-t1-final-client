@@ -1,12 +1,16 @@
 import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 const xScreen = Dimensions.get("window").width;
 const yScreen = Dimensions.get("window").height;
 
-export default function PetDetailStack() {
+export default function PetDetailStack({route}) {
   const navigation = useNavigation();
+  // const pet = route.params.pet;
+  // console.log(pet)
+  const {pet} = useRoute().params
+  console.log(pet)
 
   return (
     <View style={{ height: yScreen }}>
@@ -20,7 +24,7 @@ export default function PetDetailStack() {
       <ScrollView style={{ flex: 1, position: "absolute", bottom: -155 }}>
         <View style={{ gap: 20, backgroundColor: "white", borderTopEndRadius: 40, borderTopStartRadius: 40 }}>
           <View style={{ marginTop: 20 }}>
-            <Text style={{ width: xScreen, fontSize: 25, fontWeight: "bold", left: 20, lineHeight: 30, marginTop: 15, color: "#4B8CA1" }}>Randy</Text>
+            <Text style={{ width: xScreen, fontSize: 25, fontWeight: "bold", left: 20, lineHeight: 30, marginTop: 15, color: "#4B8CA1" }}>Kars</Text>
             <Text style={{ width: xScreen, fontSize: 15, fontWeight: "400", left: 20, lineHeight: 20, color: "#4B8CA1" }}>Breed : Siberian</Text>
           </View>
           <View style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: 10 }}>
