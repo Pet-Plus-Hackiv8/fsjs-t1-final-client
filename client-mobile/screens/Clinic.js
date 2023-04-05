@@ -37,7 +37,6 @@ export default function Clinic() {
       </View>
 
       {/* Top Home End ================================================================================================================= */}
-
       <ScrollView style={styles.maxScroll}>
         <PetClinic clinicData={clinicData} />
         {/* <View>
@@ -45,7 +44,6 @@ export default function Clinic() {
         </View> */}
       </ScrollView>
       <GoodDeals />
-
       <StatusBar style="auto" />
     </View>
   );
