@@ -10,21 +10,22 @@ import { GET_PET_BY_USER_ID } from "../queries/index";
 const yScreen = Dimensions.get("window").height;
 const xScreen = Dimensions.get("window").width;
 import OpeningPage from "../screens/OpeningPage";
-import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import { AuthContext } from "../auth";
 
 export default function Pets() {
-  const navigation = useNavigation();
-
+  const { setAccessToken, accessToken, setUserId, UserId } = useContext(AuthContext);
   const { loading, error, data } = useQuery(GET_PET_BY_USER_ID, {
     variables: { userId: 2 },
   });
-  // const jobs = data.getJobs
+  console.log(UserId, "{}{}{}");
 
   if (loading) {
     return <OpeningPage />;
   }
 
-  console.log(data, "<><><>");
+  console.log(accessToken, "<><><>");
+  console.log(UserId, "<><><>");
 
   return (
     <View style={styles.container}>

@@ -110,13 +110,13 @@ export default function App() {
                 <Stack.Screen name="register" component={Register} options={{ headerShown: false }} />
                 <Stack.Screen name="mainPages" component={MainPage} options={{ headerShown: false }} />
                 <Stack.Screen name="detailClinic" component={DetailClinic} options={{ headerShown: false }} />
+                <Stack.Screen name="hohDemo" component={HohDemoDetail} options={{ headerShown: false }} />
                 <Stack.Screen name="Chat" component={TesChat} options={{ headerShown: false }} />
                 <Stack.Screen name="petsTabDetail" component={DetailPet} options={{ headerShown: false }} />
                 <Stack.Screen name="doctorList" component={DoctorList} options={{ title: "Our Doctor & Schedule" }} />
                 <Stack.Screen name="addPet" component={AddPetForm} options={{ headerShown: false }} />
                 <Stack.Screen name="petSchedules" component={PetSchedule} options={{ title: "My Schedule" }} />
                 <Stack.Screen name="petMedicalRecords" component={PetMedicalRecord} options={{ title: "Medical Record" }} />
-                <Stack.Screen name="hohDemo" component={HohDemoDetail} options={{ headerShown: false }} />
                 <Stack.Screen name="detailMedicalRecords" component={DetailMedicalRecord} options={{ title: "Details" }} />
               </Stack.Navigator>
             </NavigationContainer>

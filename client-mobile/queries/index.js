@@ -36,3 +36,18 @@ export const LOGIN_QUERY = gql`
     }
   }
 `;
+
+export const USER_BY_ID = gql`
+  query Query($userById: ID!) {
+    userById(id: $userById) {
+      id
+      username
+      fullName
+      email
+      imgUrl
+      role
+      phoneNumber
+      address
+    }
+  }
+`;

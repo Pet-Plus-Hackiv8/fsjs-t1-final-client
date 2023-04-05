@@ -1,11 +1,18 @@
+import { useNavigation } from "@react-navigation/core";
 import { Dimensions, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
 
 export default function Services() {
+  const navigation = useNavigation();
   return (
     <View style={styles.mainView}>
       <View>
-        <TouchableOpacity style={styles.serviceBox}>
-          <Image style={styles.iconImage} source={{ uri: "https://cdn-icons-png.flaticon.com/512/4148/4148500.png" }} />
+        <TouchableOpacity style={styles.serviceBox}
+          onPress={() => {
+            navigation.navigate("Clinic", {serviceName: "veterinary"})
+          }}
+        >
+          <Image style={styles.iconImage} source={{ uri: "https://cdn-icons-png.flaticon.com/512/4148/4148500.png" }} 
+           />
         </TouchableOpacity>
         <Text style={{ textAlign: "center", color: "#4B8CA1", fontWeight: "600" }}>Vaterinary</Text>
       </View>
