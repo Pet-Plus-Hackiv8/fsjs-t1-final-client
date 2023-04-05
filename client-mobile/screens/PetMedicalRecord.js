@@ -4,16 +4,19 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native
 import { useQuery } from "@apollo/client";
 import { GET_RECORDS } from "../queries/medicalRecord";
 
-
-export default function PetMedicalRecord({route}) {
+export default function PetMedicalRecord({ route }) {
   // const { jobId } = route.params
   const navigation = useNavigation();
 
-  const { loading , error, data : medical} = useQuery(GET_RECORDS, {
+  const {
+    loading,
+    error,
+    data: medical,
+  } = useQuery(GET_RECORDS, {
     variables: {
-      petId: 1
-    }
-  })
+      petId: 1,
+    },
+  });
   // console.log(loading, error, medical,">>>>>>>>>>>>>>>>>>>>>>>>>>");
   // console.log(medical?.getRecord, "???????" );
 
@@ -37,9 +40,6 @@ export default function PetMedicalRecord({route}) {
       <View>
         <Text style={styles.title}>{item?.Petshop.name} </Text>
         <Text style={styles.title}>{item?.createdAt} </Text>
-       
-
-
       </View>
     </TouchableOpacity>
   );

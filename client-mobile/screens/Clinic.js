@@ -12,11 +12,7 @@ const yScreen = Dimensions.get("window").height;
 const xScreen = Dimensions.get("window").width;
 
 export default function Clinic() {
-  const {
-    loading,
-    error,
-    data: clinicData,
-  } = useQuery(GET_ALL_PETSHOP);
+  const { loading, error, data: clinicData } = useQuery(GET_ALL_PETSHOP);
   console.log(clinicData, ">>>>>>>");
 
   if (loading) {
