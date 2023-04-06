@@ -10,7 +10,6 @@ export default function ClinicProfile() {
         }
     })
 
-    
 
     if (loading) {
         return <LoadingScreen />
@@ -31,7 +30,7 @@ export default function ClinicProfile() {
                         Veterinarians :
                     </div>
                     <div className=" w-full flex justify-end text-4xl">
-                        3
+                        8
                     </div>
                 </div>
                 <div className="  md:w-1/5 w-full bg-blue-100 p-8 rounded-xl shadow-md">
@@ -39,7 +38,7 @@ export default function ClinicProfile() {
                         Services :
                     </div>
                     <div className=" w-full flex justify-end text-4xl">
-                        12
+                        7
                     </div>
                 </div>
                 <div className="  md:w-1/5 w-full bg-fuchsia-100 p-8 rounded-xl shadow-md">
@@ -47,7 +46,7 @@ export default function ClinicProfile() {
                         Medical Records :
                     </div>
                     <div className=" w-full flex justify-end text-4xl">
-                        40
+                        1
                     </div>
                 </div>
             </div>
@@ -55,7 +54,7 @@ export default function ClinicProfile() {
                 <div className="text-3xl pb-4 font-bold outline-1 outline-black text-[#ff9787] ">
                     Appointment list
                 </div>
-                <DashboardTable schedules={data.fetchPetScheduleForPetshop} />
+                <DashboardTable schedules={data?.fetchPetScheduleForPetshop} />
             </div>
         </div>
     )

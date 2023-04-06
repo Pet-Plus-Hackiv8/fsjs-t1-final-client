@@ -109,7 +109,7 @@ export default function PostsCard({ post }) {
             <label htmlFor={`image_${post.id}`} className="modal cursor-pointer">
                 <label className="modal-box relative  ml-72" htmlFor="">
                     <h3 className="text-lg font-bold">Post Image</h3>
-                    <img src={post.imageUrl} />
+                    <img className=" rounded-md mt-4" src={post.imageUrl} />
                 </label>
             </label>
 

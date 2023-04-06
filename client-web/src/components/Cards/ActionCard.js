@@ -22,8 +22,8 @@ export default function ActionCard({ service, no }) {
     let name = ""
     if (data) {
         let test = data.fetchService.find(el => {
-            if (el.id === service.ServiceId) {
-                return el
+            if (el.id == service.ServiceId) {
+                return el;
             }
         })
         name = test.name

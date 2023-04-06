@@ -96,12 +96,12 @@ const router = createBrowserRouter([
     {
         path: "/register/clinic",
         element: <CreateClinic />,
-        loader: () => {
-            if (localStorage.getItem("access_token")) {
-                return redirect('/')
-            }
-            return null
-        }
+        // loader: () => {
+        //     // if ((localStorage.getItem("petshopId") && localStorage.getItem("access_token")) || !localStorage.getItem("access_token")) {
+        //     //     return redirect('/')
+        //     // }
+        //     return null
+        // }
     }
 
 ])

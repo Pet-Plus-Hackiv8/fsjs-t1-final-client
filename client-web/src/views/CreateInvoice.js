@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import FormData from "form-data";
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import ActionCard from "../components/Cards/ActionCard";
 import LoadingScreen from "../components/LoadingScreen";
 import { GET_DOCTOR } from "../queries/doctors";
@@ -9,8 +9,11 @@ import { CREATE_INVOICE } from "../queries/invoice";
 import { GET_PET } from "../queries/pet";
 import { CREATE_RECORD } from "../queries/record";
 import { GET_SERVICES } from "../queries/services";
+import QRCode from "react-qr-code";
+
 
 export default function CreateInvoice() {
+    const navigate = useNavigate()
     const [note, setNote] = useState()
     const [actions, setActions] = useState([])
     const [action, setAction] = useState({
@@ -23,22 +26,22 @@ export default function CreateInvoice() {
     let invoice = {
         newPost: {
             PetshopId: Number(localStorage.getItem("petshopId")),
-            PetScheduleId: id,
-            PetId: petId,
-            DoctorId: doctorId
+            PetScheduleId: Number(id),
+            PetId: Number(petId),
+            DoctorId: Number(doctorId)
         }
     }
 
     const getDoctor = useQuery(GET_DOCTOR, {
         variables: {
-            doctorId: doctorId,
+            doctorId: Number(doctorId),
             petshopId: Number(localStorage.getItem("petshopId"))
         }
     })
 
     const getPet = useQuery(GET_PET, {
         variables: {
-            fetchPetId: petId
+            fetchPetId: Number(petId)
         }
     })
 
@@ -79,8 +82,12 @@ export default function CreateInvoice() {
 
     const [makeRecord, resRecord] = useMutation(CREATE_RECORD)
     const createRecord = async () => {
+        console.log("masuk")
         invoice.newPost.notes = note
         invoice.newPost.Actions = actions
+        console.log(invoice)
+
+        navigate('/histories')
         await makeRecord({
             variables: invoice
         })
@@ -89,20 +96,25 @@ export default function CreateInvoice() {
     let loadingData = resRecord.data
     let loadingError = resRecord.error
 
-    console.log(loadingData)
+    // console.log(loadingData)
 
     const addAction = (e) => {
         e.preventDefault()
-        let temp = structuredClone(actions)
-        // console.log(action, actions)
-        temp.push(action);
-        setActions(temp)
+        let arr = structuredClone(actions)
+        let obj = structuredClone(action)
+        obj.ServiceId = Number(obj.ServiceId)
+        obj.totalPrice = Number(obj.totalPrice)
+
+        console.log(obj);
+        arr.push(obj);
+        setActions(arr)
         setAction({
             ServiceId: 0,
             totalPrice: "",
             document: "-"
         })
         document.getElementById('action_modal').checked = false;
+        console.log("selesai add action")
     }
 
     // console.log(actions)
@@ -139,8 +151,27 @@ export default function CreateInvoice() {
     }
 
     let total = actions.reduce((accumulator, el) => {
-        return accumulator + Number(el.totalPrice);
+        return accumulator + el.totalPrice;
     }, 0);
+
+    let renderQR = (link) => {
+        return (
+            <QRCode
+                size={128}
+                style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                value={link}
+                viewBox={`0 0 128 128`}
+            />
+        )
+    }
+
+    const currentDate = new Date();
+    const tomorrowDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+    tomorrowDate.setHours(currentDate.getHours());
+    tomorrowDate.setMinutes(currentDate.getMinutes());
+    tomorrowDate.setSeconds(currentDate.getSeconds());
+
+
 
     const formatCurreny = (number) => {
         const options = { style: 'currency', currency: 'IDR' };
@@ -185,10 +216,10 @@ export default function CreateInvoice() {
 
                         <div className="flex">
                             <div className=" w-1/3 font-bold text-lg text-[#181a2a]">
-                                Time
+                                Date
                             </div>
                             <div className=" text-lg">
-                                : {new Date().toLocaleString() + ""}
+                                : {new Date().toLocaleString()}
                             </div>
                         </div>
                     </div>
@@ -267,24 +298,62 @@ export default function CreateInvoice() {
                                 )
                             })
                         }
-
                     </div>
                 </div>
             </div>
             <div>
-
                 {/* payment modal */}
                 <div>
                     <input type="checkbox" id="payment_modal" className="modal-toggle" />
                     <div className="modal">
                         <div className="modal-box ml-60 p-4">
                             <div>
-                                <h3 className="text-lg font-bold">Payment link</h3>
-                                <div className="text-lg pb-8 link link-primary">
-                                    <a href={data?.generateInvoice.invoice} target="_blank" rel="noreferrer">
-                                        {
-                                            data?.generateInvoice.invoice
-                                        }
+                                <h3 className="text-lg font-bold pb-4">Payment info</h3>
+                                <div className=" w-full pl-20">
+                                    <div className=" flex">
+                                        <div className=" w-1/4">
+                                            Name
+                                        </div>
+                                        <div className=" w-3/4">
+                                            : {getPet.data.fetchPet.User.fullName}
+                                        </div>
+                                    </div>
+                                    <div className=" flex">
+                                        <div className=" w-1/4">
+                                            Email
+                                        </div>
+                                        <div className=" w-3/4">
+                                            : {getPet.data.fetchPet.User.email}
+                                        </div>
+                                    </div>
+                                    <div className=" flex">
+                                        <div className=" w-1/4">
+                                            Date issued
+                                        </div>
+                                        <div className=" w-3/4">
+                                            : {new Date().toLocaleString()}
+                                        </div>
+                                    </div>
+                                    <div className=" flex">
+                                        <div className=" w-1/4">
+                                            Date due
+                                        </div>
+                                        <div className=" w-3/4">
+                                            : { tomorrowDate.toLocaleString() }
+                                        </div>
+                                    </div>
+                                    <div className=" flex">
+                                        <div className=" w-1/4">
+                                            Total payment
+                                        </div>
+                                        <div className=" w-3/4 font-semibold">
+                                            : {formatCurreny(total)}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className=" p-20 py-7">
+                                    <a className="text-lg link link-primary" href={data?.generateInvoice.invoice} target="_blank" rel="noreferrer">
+                                        {data ? renderQR(data.generateInvoice.invoice) : ""}
                                     </a>
                                 </div>
                                 <div className=" flex justify-end gap-4">
@@ -341,7 +410,7 @@ export default function CreateInvoice() {
                                             {
                                                 servicesData.map((el, i) => {
                                                     return (
-                                                        <option key={i} value={el.id} >{el.name}</option>
+                                                        <option key={i} value={Number(el.id)} >{el.name}</option>
                                                     )
                                                 })
                                             }

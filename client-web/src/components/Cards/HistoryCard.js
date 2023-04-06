@@ -7,13 +7,18 @@ export default function HistoryCard() {
                 1
             </div>
             <div className=" w-3/12">
-                <NavLink to="/pet/history/1" className=" font-semibold text-[#567096] duration-200 w-fit hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 active:text-[#ff9787] select-none">
-                    Randy
-                </NavLink>
+                <div className=" font-semibold text-lg text-[#567096] duration-200">
+                    <NavLink to={`/pet/owner/${1}`} className=" hover:cursor-pointer hover:scale-105 hover:underline underline-offset-2 duration-200 active:text-[#ff9787] select-none  w-fit">
+                        Milo
+                    </NavLink>
+                </div>
+                <div className="text-sm text-gray-500 select-none">
+                    Dog
+                </div>
             </div>
 
             <div className=" w-3/12">
-                January 2023
+                5 April 2023
                 {/* <span className=" bg-green-200 p-4 pt-1 pb-2 rounded-full">
                     active
                 </span> */}

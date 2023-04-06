@@ -5,13 +5,13 @@ export default function HistoryTable() {
         <>
             <div className="flex justify-around border-b-2 border-[#b0bfbf] text-lg ">
                 <div className=" pl-6 w-2/12">
-                    Id.
+                    Id
                 </div>
                 <div className=" w-3/12">
                     Name
                 </div>
                 <div className=" w-3/12">
-                    Date Created
+                    Date Completed
                 </div>
                 <div className=" w-3/12">
                     Content
@@ -21,19 +21,7 @@ export default function HistoryTable() {
                 </div>
             </div>
             <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
+       
         </>
     )
 }
