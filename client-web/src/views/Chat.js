@@ -14,10 +14,10 @@ export default function Chat() {
             // Safe to use the SDK here
             const currentUser = new Talk.User({
                 id: '1',
-                name: 'Galaxy Pet Shop',
-                email: 'galaxy@mail.com',
-                photoUrl: 'https://i.guim.co.uk/img/media/c5e73ed8e8325d7e79babf8f1ebbd9adc0d95409/2_5_1754_1053/master/1754.jpg?width=620&quality=45&dpr=2&s=none',
-                welcomeMessage: `Hi, welcome to ${"Galaxy Pet Shop"}! How can we help you today?`,
+                name: 'Hoh Pet Clinic',
+                email: 'admin@mail.com',
+                photoUrl: 'https://i.pinimg.com/originals/95/e7/b5/95e7b509dd285cbf25140ebf22806383.gif',
+                welcomeMessage: `Hi, welcome to ${"Hoh Pet Clinic"}! How can we help you today?`,
                 role: 'default',
             });
 
@@ -27,7 +27,7 @@ export default function Chat() {
                     name: "Alice",
                     email: "alice@example.com",
                     photoUrl: "https://talkjs.com/images/avatar-1.jpg",
-                    welcomeMessage: "Hey there! How are you? :-)",
+                    welcomeMessage: " ",
                     role: "default",
                 }
             );

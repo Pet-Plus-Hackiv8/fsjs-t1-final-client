@@ -157,13 +157,20 @@ export default function CreateInvoice() {
     let renderQR = (link) => {
         return (
             <QRCode
-                size={256}
+                size={128}
                 style={{ height: "auto", maxWidth: "100%", width: "100%" }}
                 value={link}
                 viewBox={`0 0 128 128`}
             />
         )
     }
+
+    const currentDate = new Date();
+    const tomorrowDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+    tomorrowDate.setHours(currentDate.getHours());
+    tomorrowDate.setMinutes(currentDate.getMinutes());
+    tomorrowDate.setSeconds(currentDate.getSeconds());
+
 
 
     const formatCurreny = (number) => {
@@ -209,10 +216,10 @@ export default function CreateInvoice() {
 
                         <div className="flex">
                             <div className=" w-1/3 font-bold text-lg text-[#181a2a]">
-                                Time
+                                Date
                             </div>
                             <div className=" text-lg">
-                                : 5 April 2023
+                                : {new Date().toLocaleString()}
                             </div>
                         </div>
                     </div>
@@ -291,21 +298,61 @@ export default function CreateInvoice() {
                                 )
                             })
                         }
-
                     </div>
                 </div>
             </div>
             <div>
-
                 {/* payment modal */}
                 <div>
                     <input type="checkbox" id="payment_modal" className="modal-toggle" />
                     <div className="modal">
                         <div className="modal-box ml-60 p-4">
                             <div>
-                                <h3 className="text-lg font-bold">Payment link</h3>
-                                <div className="text-lg p-20 link link-primary">
-                                    <a href={data?.generateInvoice.invoice} target="_blank" rel="noreferrer">
+                                <h3 className="text-lg font-bold pb-4">Payment info</h3>
+                                <div className=" w-full pl-20">
+                                    <div className=" flex">
+                                        <div className=" w-1/4">
+                                            Name
+                                        </div>
+                                        <div className=" w-3/4">
+                                            : {getPet.data.fetchPet.User.fullName}
+                                        </div>
+                                    </div>
+                                    <div className=" flex">
+                                        <div className=" w-1/4">
+                                            Email
+                                        </div>
+                                        <div className=" w-3/4">
+                                            : {getPet.data.fetchPet.User.email}
+                                        </div>
+                                    </div>
+                                    <div className=" flex">
+                                        <div className=" w-1/4">
+                                            Date issued
+                                        </div>
+                                        <div className=" w-3/4">
+                                            : {new Date().toLocaleString()}
+                                        </div>
+                                    </div>
+                                    <div className=" flex">
+                                        <div className=" w-1/4">
+                                            Date due
+                                        </div>
+                                        <div className=" w-3/4">
+                                            : { tomorrowDate.toLocaleString() }
+                                        </div>
+                                    </div>
+                                    <div className=" flex">
+                                        <div className=" w-1/4">
+                                            Total payment
+                                        </div>
+                                        <div className=" w-3/4 font-semibold">
+                                            : {formatCurreny(total)}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className=" p-20 py-7">
+                                    <a className="text-lg link link-primary" href={data?.generateInvoice.invoice} target="_blank" rel="noreferrer">
                                         {data ? renderQR(data.generateInvoice.invoice) : ""}
                                     </a>
                                 </div>

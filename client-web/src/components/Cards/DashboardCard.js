@@ -6,6 +6,7 @@ import LoadingScreen from "../LoadingScreen";
 export default function DashboardCard({ schedule, no }) {
     // console.log(schedule)
     const navigate = useNavigate();
+    console.log(schedule)
 
     const { loading, error, data } = useQuery(GET_DOCTOR, {
         variables: {
@@ -13,11 +14,12 @@ export default function DashboardCard({ schedule, no }) {
             doctorId: schedule.DoctorSchedule.DoctorId
         }
     })
+    console.log(schedule.DoctorSchedule.DoctorId)
+    console.log(Number(localStorage.getItem("petshopId")))
 
     const changePage = () => {
         navigate(`/invoice/${schedule.id}/${schedule.Pet.id}/${schedule.DoctorSchedule.DoctorId}`)
     }
-
 
     if (loading) {
         return <LoadingScreen />
